@@ -6,284 +6,781 @@
     <title>최서영 | Portfolio</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <style>
+        /* 기본 라이트 모드 (프리미엄 미니멀) */
         :root {
-            /* 카카오뱅크 브랜드 아이덴티티 컬러 전면 매핑 */
-            --primary: #FFD600; /* 카카오 메인 옐로우 */
+            --primary: #FFD600;
             --primary-hover: #E6BF00;
-            --bg: #ffffff;
-            --secondary-bg: #FAFAFA;
-            --text-main: #1A1A1A; /* 카카오 다크그레이 */
-            --text-sub: #A6A6AD;
-            --card-border: rgba(0,0,0,0.04);
-            --modal-overlay: rgba(0, 0, 0, 0.4);
+            --bg: #FAFAFC;
+            --card-bg: #ffffff;
+            --text-main: #111113;
+            --text-sub: #8B8B93;
+            --accent-color: rgba(0, 0, 0, 0.08);
+            --hero-point-color: #3A66FF;
+            --card-border: rgba(0, 0, 0, 0.04);
+            --modal-overlay: rgba(15, 15, 20, 0.35);
+            --modal-bg: #ffffff;
+            --glow-1: rgba(255, 214, 0, 0.15);
+            --glow-2: rgba(58, 102, 255, 0.06);
+            --status-bg: rgba(0, 0, 0, 0.04);
+            --status-text: #111113;
+            --tag-active-bg: #111113;
+            --tag-active-text: #ffffff;
+            --tag-completed-bg: rgba(255, 255, 255, 0.92);
+            --tag-completed-text: #111113;
+            --img-overlay: linear-gradient(to top, rgba(8, 8, 10, 0.95) 0%, rgba(8, 8, 10, 0.6) 50%, rgba(8, 8, 10, 0.1) 85%, transparent 100%);
+            --img-box-bg: #EAEAEF;
+            --img-opacity: 1;
+            --nav-bg: rgba(250, 250, 252, 0.85);
+            --border-line: rgba(0, 0, 0, 0.04);
+            --close-btn-bg: #F1F1F5;
+            --close-btn-text: #111113;
+            --contact-grad: linear-gradient(to bottom, var(--bg) 0%, #ffffff 100%);
+            --contact-bg: #ffffff;
+            --timeline-line: #EAEAEF;
+        }
+
+        /* 다크 모드 테마 (사이버 테크 콘솔) */
+        [data-theme="dark"] {
+            --primary: #00E5FF;
+            --primary-hover: #00B8D4;
+            --bg: #0A0A0F;
+            --card-bg: #12121A;
+            --text-main: #F3F3F6;
+            --text-sub: #7E7E8A;
+            --accent-color: rgba(0, 229, 255, 0.3);
+            --hero-point-color: #00E5FF;
+            --card-border: rgba(255, 255, 255, 0.05);
+            --modal-overlay: rgba(3, 3, 5, 0.7);
+            --modal-bg: #0E0E14;
+            --glow-1: rgba(0, 229, 255, 0.08);
+            --glow-2: rgba(0, 230, 118, 0.04);
+            --status-bg: rgba(255, 255, 255, 0.06);
+            --status-text: #00E5FF;
+            --tag-active-bg: rgba(0, 229, 255, 0.15);
+            --tag-active-text: #00E5FF;
+            --tag-completed-bg: rgba(0, 230, 118, 0.15);
+            --tag-completed-text: #00E676;
+            --img-overlay: linear-gradient(to top, #0A0A0F 0%, rgba(10, 10, 15, 0.85) 50%, transparent 100%);
+            --img-box-bg: #161622;
+            --img-opacity: 0.75;
+            --nav-bg: rgba(10, 10, 15, 0.85);
+            --border-line: rgba(255, 255, 255, 0.05);
+            --close-btn-bg: rgba(255, 255, 255, 0.06);
+            --close-btn-text: #ffffff;
+            --contact-grad: linear-gradient(to bottom, var(--bg) 0%, #0E0E14 100%);
+            --contact-bg: #0E0E14;
+            --timeline-line: #222230;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Pretendard', sans-serif; color: var(--text-main); line-height: 1.6; background-color: var(--bg); overflow-x: hidden; }
+        body { 
+            font-family: 'Pretendard', sans-serif; 
+            color: var(--text-main); 
+            line-height: 1.6; 
+            background-color: var(--bg); 
+            overflow-x: hidden;
+            letter-spacing: -0.3px;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
 
-        /* Navigation */
-        nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.75); backdrop-filter: blur(20px); z-index: 1000; padding: 1.2rem 8%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .logo { font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px; cursor: pointer; }
-        .nav-links a { margin-left: 2rem; font-size: 0.9rem; font-weight: 600; color: var(--text-sub); text-decoration: none; transition: 0.3s; }
-        .nav-links a:hover { color: var(--text-main); }
+        /* Ambient Background Orbs */
+        .bg-glow-1 { position: fixed; top: -200px; left: 150px; width: 600px; height: 600px; background: var(--glow-1); filter: blur(150px); border-radius: 50%; z-index: -1; pointer-events: none; transition: background 0.4s ease; }
+        .bg-glow-2 { position: fixed; bottom: -200px; right: -200px; width: 500px; height: 500px; background: var(--glow-2); filter: blur(130px); border-radius: 50%; z-index: -1; pointer-events: none; transition: background 0.4s ease; }
+
+        /* Left Sidebar 구조 */
+        nav { 
+            position: fixed; top: 0; left: 0; width: 330px; height: 100vh;
+            background: var(--nav-bg); 
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            z-index: 1000; padding: 2.5rem 1.8rem 1.5rem; 
+            display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; 
+            border-right: 1px solid var(--border-line); 
+            overflow-y: auto;
+            transition: background 0.4s ease, border-right 0.4s ease;
+            scrollbar-width: none;
+        }
+        nav::-webkit-scrollbar { display: none; }
+        
+        .nav-top-block { width: 100%; display: flex; flex-direction: column; gap: 1.2rem; }
+        .logo { font-weight: 900; font-size: 1.4rem; letter-spacing: -0.5px; cursor: pointer; color: var(--text-main); line-height: 1.2; margin-bottom: 0.5rem; }
+        
+        /* 프로필 이미지 박스 */
+        .profile-img-frame { 
+            width: 100%; 
+            height: auto;        
+            border-radius: 20px; 
+            overflow: hidden; 
+            background: var(--card-bg); 
+            border: 1px solid var(--border-line); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02); 
+        }
+        .profile-img-frame img { 
+            display: block;      
+            width: 100%; 
+            height: auto;        
+            object-fit: contain; 
+        }
+
+        /* 인포메이션 데스크보드 인라인 서식 */
+        .info-section { width: 100%; margin-top: 0.5rem; }
+        .info-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.6rem; padding-bottom: 6px; border-bottom: 1px solid var(--border-line); letter-spacing: -0.5px; }
+        .info-list { display: flex; flex-direction: column; gap: 0.5rem; list-style: none; font-size: 0.88rem; color: var(--text-main); font-weight: 550; }
+        .info-list li { display: flex; align-items: center; gap: 10px; word-break: break-all; line-height: 1.4; }
+        .info-list li a { color: var(--text-main); text-decoration: none; border-bottom: 1px dashed var(--text-sub); transition: 0.2s; }
+        .info-list li a:hover { color: var(--hero-point-color); border-bottom-color: var(--hero-point-color); }
+
+        /* 학력/목차 간 여백 */
+        .nav-center-wrapper { display: flex; flex-direction: column; gap: 2.5rem; width: 100%; margin-top: 3.5rem; }
+        .nav-links { display: flex; flex-direction: column; gap: 0.3rem; width: 100%; }
+        .nav-links a { font-size: 0.95rem; font-weight: 700; color: var(--text-sub); text-decoration: none; transition: all 0.25s ease; padding: 10px 14px; display: block; border-radius: 12px; }
+        .nav-links a:hover { color: var(--text-main); background: rgba(0,0,0,0.02); }
+        [data-theme="dark"] .nav-links a:hover { background: rgba(255,255,255,0.02); }
+        .nav-links a.active { color: var(--text-main); background: var(--card-bg); box-shadow: 0 4px 14px rgba(0,0,0,0.04); border: 1px solid var(--card-border); }
+
+        /* 기존 왼쪽 바 내부 푸터 영역 제거 */
+        .nav-footer { display: none; }
+
+        /* 둥둥 떠다니는 플로팅 테마 선택 토글 스위치 */
+        .theme-toggle-btn {
+            position: fixed;
+            bottom: 32px;              /* 화면 아래에서 32px 띄움 */
+            right: 32px;               /* 화면 오른쪽에서 32px 띄움 */
+            z-index: 5000;             /* 모달창보다 상위에 노출되도록 최상단 배치 */
+            
+            background: var(--card-bg); 
+            border: 1px solid var(--border-line); 
+            cursor: pointer; 
+            color: var(--text-main);
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            width: 48px;               
+            height: 48px;
+            border-radius: 50%;        /* 완벽한 원형 버튼 스타일 */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* 플로팅 그림자 효과 */
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        [data-theme="dark"] .theme-toggle-btn { 
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 229, 255, 0.2); 
+        }
+        .theme-toggle-btn:hover { 
+            border-color: var(--text-main); 
+            transform: scale(1.1) translateY(-2px); /* 호버 시 위로 살짝 떠오르는 액션 */
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+        }
+        .theme-toggle-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        [data-theme="dark"] .sun-icon { display: block; }
+        [data-theme="dark"] .moon-icon { display: none; }
+        .sun-icon { display: none; }
+        .moon-icon { display: block; }
+
+        /* 메인 콘텐츠 메인 래퍼 */
+        .main-wrapper { margin-left: 330px; width: calc(100% - 330px); }
 
         /* Hero Section */
-        .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding: 0 10%; background: radial-gradient(circle at 50% 50%, rgba(255,214,0,0.12) 0%, rgba(255,255,255,0) 70%); }
-        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.15; letter-spacing: -2.5px; margin-bottom: 2rem; }
-        .gradient-text { background: linear-gradient(135deg, #1A1A1A, #404040); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: 1.15rem; color: #404040; max-width: 720px; line-height: 1.7; word-break: keep-all; }
-
-        /* Section Commons */
-        section { padding: 100px 10%; max-width: 1400px; margin: 0 auto; }
-        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 3.5rem; letter-spacing: -1.2px; display: flex; align-items: center; gap: 15px; }
-        .badge-count { font-size: 1rem; background: #f1f3f5; padding: 4px 12px; border-radius: 20px; color: var(--text-sub); }
-
-        /* Project Cards */
-        .project-grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 280px; gap: 1.5rem; }
-        .project-card { grid-column: span 2; background: var(--secondary-bg); border-radius: 32px; overflow: hidden; position: relative; cursor: pointer; transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1); border: 1px solid var(--card-border); }
-        .project-card.large { grid-column: span 4; }
-        .project-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.08); border-color: var(--text-main); }
-        
-        .img-box { width: 100%; height: 100%; overflow: hidden; background: #eee; position: relative; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
-        .img-box.contain-img img { object-fit: contain; background: #ffffff; padding: 10px; }
-
-        /* Hover Arrow Icon (완성작 및 수상 내역 카드 공통) */
-        .arrow-icon {
-            position: absolute; top: 25px; right: 25px; width: 45px; height: 45px;
-            background: rgba(255,255,255,0.9); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; transform: translate(-10px, 10px); transition: all 0.4s ease; z-index: 5;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        .hero { 
+            height: 85vh; display: flex; flex-direction: column; justify-content: center; 
+            align-items: flex-start; text-align: left; padding: 0 10%; position: relative;
         }
-        .project-card:hover .arrow-icon, .award-card:hover .arrow-icon { opacity: 1; transform: translate(0, 0); }
-        .arrow-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--text-main); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .hero h1 { font-size: clamp(2.5rem, 5.2vw, 3.8rem); font-weight: 850; line-height: 1.25; letter-spacing: -2.5px; margin-bottom: 2.2rem; color: var(--text-main); }
+        .gradient-text { background: none; -webkit-background-clip: initial; -webkit-text-fill-color: initial; color: var(--hero-point-color); transition: color 0.4s ease; }
+        .hero p { font-size: 1.15rem; color: var(--text-sub); max-width: 740px; line-height: 1.85; word-break: keep-all; font-weight: 500; }
 
-        .status-tag { position: absolute; top: 25px; left: 25px; z-index: 2; padding: 6px 14px; background: rgba(0,0,0,0.6); color: #fff; border-radius: 100px; font-size: 0.75rem; font-weight: 700; backdrop-filter: blur(10px); transition: 0.3s; }
-        .status-tag.active { background: var(--text-main); }
-        .project-card:hover .status-tag { opacity: 0; }
+        /* Section Layouts */
+        section { padding: 90px 8%; max-width: 1300px; margin: 0 auto; position: relative; }
+        .section-title { font-size: 2.1rem; font-weight: 850; margin-bottom: 3.5rem; letter-spacing: -1.2px; display: flex; align-items: center; gap: 16px; color: var(--text-main); }
+        [data-theme="dark"] .section-title { border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
+        .badge-count { font-size: 0.9rem; background: var(--status-bg); padding: 4px 12px; border-radius: 100px; color: var(--text-sub); font-weight: 700; transition: all 0.4s ease; }
 
-        .info-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 2.5rem; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); color: white; opacity: 0; transition: 0.4s; }
-        .project-card:hover .info-overlay { opacity: 1; }
-
-        /* Honors & Awards 스타일 개편 (화살표 대응 공간 확보) */
-        .award-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .award-card { background: var(--secondary-bg); padding: 4.5rem 2.5rem 2.5rem; border-radius: 32px; position: relative; border: 1px solid var(--card-border); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
-        .award-card:hover { border-color: var(--text-main); background: #ffffff; transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.04); }
+        /* Project Cards Grid */
+        .project-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2rem; }
+        .project-card { 
+            grid-column: span 2; background: var(--card-bg); border-radius: 36px; 
+            overflow: hidden; position: relative; cursor: pointer; 
+            display: flex; flex-direction: column;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease; 
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.015);
+            height: 380px;
+        }
+        .project-card.large { grid-column: span 4; }
+        .project-card:hover { 
+            transform: translateY(-12px) scale(1.005); 
+            box-shadow: 0 35px 70px rgba(15, 15, 25, 0.12), 0 0 0 1px var(--accent-color);
+        }
         
-        .award-badge { position: absolute; top: 25px; left: 25px; background: var(--primary); color: var(--text-main); padding: 5px 14px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; letter-spacing: -0.3px; box-shadow: 0 4px 10px rgba(255,214,0,0.25); }
-        .award-card h3 { font-size: 1.4rem; font-weight: 800; margin-top: 5px; margin-bottom: 8px; letter-spacing: -0.5px; padding-right: 40px; }
-        .award-card p { color: #555558; font-size: 1rem; line-height: 1.6; }
-        .award-date { color: var(--text-sub); font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.2rem; }
+        .img-box { width: 100%; height: 100%; flex-grow: 1; overflow: hidden; background: var(--img-box-bg); position: relative; transition: background 0.4s ease; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; opacity: var(--img-opacity); transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease; }
+        .img-box.contain-img img { object-fit: contain; background: var(--card-bg); padding: 35px; }
+        .project-card:hover .img-box img { transform: scale(1.03); opacity: 1; }
 
-        /* 와이드 모달 스타일 및 스크롤바 */
+        /* Interactive Elements */
+        .arrow-icon {
+            position: absolute; top: 24px; right: 24px; width: 46px; height: 46px;
+            background: #ffffff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: translate(-12px, 12px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 15;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        [data-theme="dark"] .arrow-icon { background: var(--primary); border-radius: 12px; }
+        .project-card:hover .arrow-icon, .award-card:hover .arrow-icon { opacity: 1; transform: translate(0, 0); }
+        .arrow-icon svg { width: 20px; height: 20px; fill: none; stroke: #111113; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+        .status-tag { 
+            position: absolute; top: 24px; left: 24px; z-index: 10; 
+            padding: 8px 18px; background: var(--tag-completed-bg); 
+            color: var(--tag-completed-text); border-radius: 100px; font-size: 0.82rem; 
+            font-weight: 700; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s ease; 
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04); 
+        }
+        .status-tag.active { background: var(--tag-active-bg); color: var(--tag-active-text); border-color: var(--tag-active-bg); }
+        [data-theme="dark"] .status-tag { border-radius: 8px; font-family: monospace; text-transform: uppercase; }
+        .project-card:hover .status-tag { transform: translateY(-4px); background: #ffffff; color: #000000; border-color: #ffffff; }
+
+        .info-overlay { 
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 4rem 2.5rem 2.5rem; 
+            background: var(--img-overlay); 
+            color: white; opacity: 0; transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1); z-index: 12;
+        }
+        .project-card:hover .info-overlay { opacity: 1; }
+        .info-overlay h3 { font-size: 1.45rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; color: #ffffff; }
+        .info-overlay p { font-size: 0.98rem; color: rgba(255, 255, 255, 0.8); font-weight: 400; line-height: 1.5; }
+
+        /* 경력 타임라인 컴포넌트 */
+        .timeline-container { position: relative; padding-left: 2rem; margin-top: 1rem; }
+        .timeline-container::before { content: ''; position: absolute; top: 5px; left: 6px; width: 2px; height: 100%; background: var(--timeline-line); transition: background 0.4s ease; }
+        .timeline-item { position: relative; margin-bottom: 3.5rem; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-dot { position: absolute; top: 6px; left: -2rem; width: 14px; height: 14px; background: var(--bg); border: 3px solid var(--text-main); border-radius: 50%; z-index: 5; transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .timeline-item:hover .timeline-dot { background: var(--primary); }
+        .timeline-content { background: var(--card-bg); padding: 2.2rem 2.5rem; border-radius: 28px; border: 1px solid var(--card-border); box-shadow: 0 6px 24px rgba(0,0,0,0.01); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .timeline-content:hover { transform: translateX(8px); border-color: var(--accent-color); box-shadow: 0 15px 35px rgba(0,0,0,0.03); }
+        .timeline-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 8px; }
+        .timeline-period { font-size: 0.88rem; font-weight: 700; color: var(--text-sub); font-family: monospace; }
+        .timeline-title { font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .timeline-desc { color: var(--text-sub); font-size: 0.98rem; line-height: 1.65; text-align: justify; }
+
+        /* 💡 국방색/워드 느낌을 지우고 텍스트에 파란색 포인트를 준 프리미엄 배지 레이아웃 */
+        .timeline-institution-line { 
+            display: flex; 
+            flex-direction: column;    
+            gap: 10px;                 
+            margin: 12px 0 16px 0;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;       
+            gap: 12px;                 
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 0;         
+            width: 65px;               /* 두 라벨 박스 가로 크기 완벽히 일치 시킴 */
+            text-align: center;        /* 글자 가운데 정렬 */
+            font-size: 11px;           
+            font-weight: 700;          
+            border-radius: 6px;        
+            white-space: nowrap;       
+        }
+        
+        /* ☀️ 라이트모드: 본문 파란색과 어우러지는 상큼한 파랑/주황 배지 리턴 */
+        .label-institution {
+            background-color: #E3F2FD; /* 부드러운 파스텔 블루 */
+            color: #0D47A1;            /* 신뢰감을 주는 딥 블루 */
+        }
+        .label-activity {
+            background-color: #FFF3E0; /* 부드러운 파스텔 오렌지 */
+            color: #E65100;            /* 활력을 주는 딥 오렌지 */
+        }
+        .content {
+            font-size: 13.5px;
+            font-weight: 700;          
+            color: #3A66FF;            /* 실제 내용 글씨 파란색 유지 */
+        }
+
+        /* 🌙 다크모드: 사이버 테크 콘솔에 맞는 네온 컬러 매칭 */
+        [data-theme="dark"] .label-institution {
+            background-color: rgba(0, 229, 255, 0.12);
+            color: #00E5FF;            /* 네온 시안 */
+        }
+        [data-theme="dark"] .label-activity {
+            background-color: rgba(255, 145, 0, 0.15);
+            color: #FF9100;            /* 네온 오렌지 */
+        }
+        [data-theme="dark"] .content {
+            color: #00E5FF;            /* 다크모드 내용 글씨는 시안 블루로 일치 */
+        }
+
+        /* Honors & Awards Section */
+        /* 💡 섹션 자체의 패딩은 건드리지 않아 제목 열을 다른 섹션과 완벽히 일치시킵니다. */
+        #awards {
+            /* 기존 padding: 90px 4% 지우기 (기본 section의 8%를 따르도록) */
+        }
+
+        /* 💡 타이틀 열은 유지하되, 하단 카드 박스들만 좌우로 더 널찍하게 확장하는 구조 */
+        .award-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 1.5rem;               
+            margin-left: -4%;  /* 왼쪽으로 박스 확장 */
+            margin-right: -4%; /* 오른쪽으로 박스 확장 */
+        }
+
+        /* 💡 모바일 화면 등에서 화면 밖으로 박스가 나가지 않도록 미디어 쿼리 최적화 */
+        @media (max-width: 1024px) {
+            .award-grid {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        .award-card { 
+            background: var(--card-bg); 
+            padding: 4.5rem 2.2rem 2.5rem; 
+            border-radius: 36px; 
+            position: relative; 
+            border: 1px solid var(--card-border); 
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border 0.4s ease; 
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.01); 
+        }
+
+        /* 제목 글씨 두께와 여백 최적화 */
+        .award-card h3 { 
+            font-size: 1.45rem;        /* 폰트 크기를 아주 미세하게 다듬어 한 줄 정렬 유도 */
+            font-weight: 850; 
+            margin-top: 10px; 
+            margin-bottom: 10px; 
+            letter-spacing: -0.6px; 
+            padding-right: 40px;       /* 화살표와 겹치지 않게 여백 조정 */
+            color: var(--text-main); 
+            line-height: 1.3;
+        }
+
+        [data-theme="dark"] .award-card { border-radius: 24px; }
+        .award-card:hover { background: var(--card-bg); transform: translateY(-6px); box-shadow: 0 25px 50px rgba(15, 15, 25, 0.06), 0 0 0 1px var(--accent-color); }
+        
+
+        /* 상단 CSS에서 .award-badge를 찾아 아래 코드로 교체해 주세요 */
+        .award-badge { 
+            position: absolute; 
+            top: 28px; 
+            left: 30px; 
+            background: #FFFDE7;       /* 아주 연하고 부드러운 옐로우 파스텔 */
+            color: #8D6E63;            /* 💡 가독성을 높여주는 고급스러운 브라운 골드 텍스트 */
+            border: 1px solid #FFE082; /* 연한 골드빛 테두리 */
+            padding: 6px 16px; 
+            border-radius: 14px; 
+            font-size: 0.8rem; 
+            font-weight: 800; 
+            box-shadow: 0 4px 10px rgba(255,214,0,0.05); 
+            transition: all 0.4s ease; 
+        }
+
+        /* 🌙 다크모드는 원래의 사이버 네온 옐로우 느낌이 잘 보이므로 그대로 유지 */
+        [data-theme="dark"] .award-badge { 
+            background: rgba(255, 214, 0, 0.1); 
+            color: #FFD600; 
+            border: 1px solid #FFD600;
+            border-radius: 8px; 
+        }
+        .award-card h3 { font-size: 1.5rem; font-weight: 800; margin-top: 8px; margin-bottom: 10px; letter-spacing: -0.6px; padding-right: 45px; color: var(--text-main); }
+        .award-card p { color: var(--text-sub); font-size: 1.02rem; line-height: 1.65; font-weight: 400; }
+        .award-date { color: var(--text-sub); font-weight: 650; font-size: 0.88rem; display: block; margin-bottom: 0.3rem; letter-spacing: 0px; }
+
+        /* Sticky Control Wide Modal Design */
         #detailViewer { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: var(--modal-overlay); z-index: 2000; display: none; 
-            align-items: center; justify-content: center; padding: 20px;
-            backdrop-filter: blur(8px);
+            align-items: center; justify-content: center; padding: 24px;
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            transition: background 0.4s ease;
         }
         .modal-window {
-            background: var(--bg); width: 92%; max-width: 1100px; height: 90vh;
-            border-radius: 32px; overflow-y: auto; position: relative;
-            box-shadow: 0 35px 70px rgba(0,0,0,0.25);
-            animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid rgba(255,255,255,0.1);
-            scrollbar-width: thin;
-            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+            background: var(--modal-bg); width: 88%; max-width: 1100px; height: 88vh;
+            border-radius: 40px; overflow-y: auto; position: relative;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.22);
+            animation: modalFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid var(--card-border);
+            scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+            transition: background-color 0.4s ease, border 0.4s ease;
         }
 
-        /* 커스텀 부드러운 스크롤바 */
-        .modal-window::-webkit-scrollbar { width: 8px; }
-        .modal-window::-webkit-scrollbar-track { background: transparent; margin: 20px 0; }
-        .modal-window::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.15); border-radius: 10px; transition: background 0.2s; }
-        .modal-window::-webkit-scrollbar-thumb:hover { background: var(--text-main); }
-
-        @keyframes modalFadeIn {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .modal-header-sticky {
+            position: sticky; top: 0; width: 100%; height: 80px;
+            background: var(--modal-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: flex-end;
+            padding: 0 40px; z-index: 2100; border-bottom: 1px solid var(--border-line);
+            transition: background-color 0.4s ease, border-bottom 0.4s ease;
         }
         .close-btn { 
-            position: absolute; top: 25px; right: 35px; width: 44px; height: 44px; 
-            background: #f1f3f5; color: var(--text-main); border-radius: 50%; 
+            width: 46px; height: 46px; background: var(--close-btn-bg); color: var(--close-btn-text); border-radius: 50%; 
             display: flex; align-items: center; justify-content: center; cursor: pointer; 
-            z-index: 2100; font-weight: 700; transition: 0.2s;
+            font-weight: 700; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid var(--card-border);
         }
-        .close-btn:hover { background: #e2e6ea; transform: rotate(90deg); }
-        
-        .detail-content { padding: 4.5rem 4.5rem 4rem; }
-        .detail-content h2 { font-size: 2.4rem; font-weight: 800; margin-bottom: 14px; letter-spacing: -1.2px; line-height: 1.3; }
-        .detail-tags { color: var(--text-sub); font-weight: 700; margin-bottom: 35px; display: block; font-size: 1rem; }
-        .detail-content h4 { font-size: 1.45rem; margin: 3rem 0 1.2rem; border-left: 5px solid var(--text-main); padding-left: 16px; font-weight: 700; }
-        .detail-content p { margin-bottom: 1.4rem; color: #4e4e52; font-size: 1.08rem; text-align: justify; line-height: 1.7; }
-        .detail-content img { width: 100%; border-radius: 24px; margin: 1.5rem 0; border: 1px solid #eee; box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
-        .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 2rem 0; }
-        
-        /* 버튼 디자인 */
-        .btn-container { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
-        .action-link-btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 14px 28px; background: var(--text-main); color: white;
-            text-decoration: none; font-weight: 700; border-radius: 16px;
-            transition: 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            font-size: 1rem;
-        }
-        .action-link-btn:hover { background: #000000; transform: translateY(-2px); }
-        .action-link-btn.secondary { background: var(--primary); color: var(--text-main); box-shadow: 0 4px 15px rgba(255,214,0,0.15); }
-        .action-link-btn.secondary:hover { background: var(--primary-hover); }
+        [data-theme="dark"] .close-btn { border-radius: 12px; }
+        .close-btn:hover { background: var(--text-main); color: var(--bg); transform: rotate(90deg); }
 
-        /* Contact 섹션 카드형 레이아웃 */
-        #contact { text-align: center; padding: 100px 10%; background: var(--secondary-bg); border-radius: 50px 50px 0 0; border-top: 1px solid rgba(0,0,0,0.02); }
-        .contact-grid { display: flex; justify-content: center; gap: 24px; max-width: 700px; margin: 2.5rem auto 0; }
-        .contact-card-btn {
-            flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 2.5rem 2rem; background: #ffffff; border-radius: 24px; border: 1px solid var(--card-border);
-            text-decoration: none; color: var(--text-main); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+        .modal-window::-webkit-scrollbar { width: 8px; }
+        .modal-window::-webkit-scrollbar-track { background: transparent; }
+        .modal-window::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.12); border-radius: 10px; }
+        [data-theme="dark"] .modal-window::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); }
+        .modal-window::-webkit-scrollbar-thumb:hover { background: var(--text-main); }
+        
+        .detail-content { padding: 2rem 5.5rem 5.5rem; }
+        .detail-content h2 { font-size: 2.6rem; font-weight: 850; margin-bottom: 16px; letter-spacing: -1.5px; line-height: 1.3; color: var(--text-main); }
+        .detail-tags { color: var(--text-sub); font-weight: 700; margin-bottom: 45px; display: block; font-size: 1.05rem; }
+        [data-theme="dark"] .detail-tags { color: var(--primary); }
+        .detail-content h4 { font-size: 1.5rem; margin: 3.5rem 0 1.4rem; border-left: 6px solid var(--text-main); padding-left: 18px; font-weight: 800; color: var(--text-main); }
+        [data-theme="dark"] .detail-content h4 { border-left-color: var(--primary); }
+        .detail-content p { margin-bottom: 1.6rem; color: var(--text-sub); font-size: 1.1rem; text-align: justify; line-height: 1.8; font-weight: 450; }
+        [data-theme="dark"] .detail-content p { color: #C5C5D2; }
+        .detail-content img { width: 100%; border-radius: 28px; margin: 2rem 0; border: 1px solid var(--border-line); box-shadow: 0 10px 35px rgba(0,0,0,0.04); }
+        .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 2.5rem 0; }
+        
+        .btn-container { display: flex; gap: 16px; margin-top: 35px; flex-wrap: wrap; }
+        .action-link-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 32px; background: rgba(255, 255, 255, 0.06); color: var(--text-main);
+            text-decoration: none; font-weight: 700; border-radius: 20px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid var(--card-border);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04); font-size: 1rem;
         }
-        .contact-card-btn:hover {
-            transform: translateY(-8px); border-color: var(--text-main);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-        }
-        .contact-card-btn .icon-wrapper {
-            width: 56px; height: 56px; background: var(--secondary-bg); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
-            transition: 0.3s; color: var(--text-main);
-        }
-        .contact-card-btn:hover .icon-wrapper { background: var(--primary); }
+        [data-theme="dark"] .action-link-btn { border-radius: 14px; background: rgba(255, 255, 255, 0.06); color: #fff; }
+        .action-link-btn:hover { background: var(--text-main); color: var(--bg); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
+        .action-link-btn.secondary { background: var(--primary); color: #111113; box-shadow: 0 6px 20px rgba(255,214,0,0.2); border: none; }
+        .action-link-btn.secondary:hover { background: var(--primary-hover); transform: translateY(-3px); }
+
+        /* Contact Section */
+        #contact { text-align: center; padding: 140px 8% 120px; background: var(--contact-grad); border-radius: 0; box-shadow: none; transition: background 0.4s ease; }
+        .contact-grid { display: flex; justify-content: center; gap: 28px; max-width: 760px; margin: 4rem auto 0; }
+        .contact-card-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 2rem; background: var(--card-bg); border-radius: 24px; border: 1px solid var(--card-border); text-decoration: none; color: var(--text-main); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        .contact-card-btn:hover { transform: translateY(-10px); background: var(--card-bg); box-shadow: 0 25px 50px rgba(15, 15, 25, 0.05), 0 0 0 1px var(--accent-color); }
+        .contact-card-btn .icon-wrapper { width: 60px; height: 60px; background: var(--bg); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-main); border: 1px solid var(--card-border); }
+        .contact-card-btn:hover .icon-wrapper { background: var(--primary); color: #111113; transform: scale(1.05); }
         .contact-card-btn .icon-wrapper svg { width: 24px; height: 24px; fill: currentColor; }
-        .contact-card-btn span.label { font-size: 0.85rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
-        .contact-card-btn span.value { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.3px; }
+        .contact-card-btn span.label { font-size: 0.85rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.4rem; }
+        .contact-card-btn span.value { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.3px; color: var(--text-main); }
+
+        @media (max-width: 768px) {
+            .info-item { align-items: flex-start; }
+            .badge { margin-top: 2px; }
+            .theme-toggle-btn {
+                bottom: 20px;          /* 모바일에서는 버튼 크기와 여백을 소폭 축소 */
+                right: 20px;
+                width: 44px;
+                height: 44px;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+
     <nav>
-        <div class="logo" onclick="window.scrollTo(0,0)">CHOI SEOYOUNG</div>
-        <div class="nav-links">
-            <a href="#ongoing">Research</a>
-            <a href="#completed">Projects</a>
-            <a href="#awards">Awards</a>
-            <a href="#contact">Contact</a>
+        <div class="nav-top-block">
+            <div class="logo" onclick="window.scrollTo(0,0)">CHOI<br>SEOYOUNG</div>
+
+            <div class="profile-img-frame">
+                <img src="profile.jpg" alt="최서영 프로필 사진">
+            </div>
+
+            <div class="info-section">
+                <h3>연락처</h3>
+                <ul class="info-list">
+                    <li>📞 +82 1080138939</li>
+                    <li>✉️ <a href="mailto:seoyoung8939@gmail.com">seoyoung8939@gmail.com</a></li>
+                    <li>📍 Seoul, South Korea</li>
+                    <li>🌐 <a href="https://github.com/csy030922" target="_blank">github.com/csy030922</a></li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3>언어</h3>
+                <ul class="info-list">
+                    <li>🇰🇷 한국어</li>
+                    <li>🇺🇸 영어</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3>학력</h3>
+                <ul class="info-list" style="margin-bottom: 0;">
+                    <li>🏢 광운대학교</li>
+                    <li>🎓 정보융합학부 데이터사이언스 전공</li>
+                    <li>📊 3.6 / 4.5</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="nav-center-wrapper">
+            <div class="nav-links">
+                <a href="#ongoing" class="nav-item">Research</a>
+                <a href="#completed" class="nav-item">Projects</a>
+                <a href="#experience" class="nav-item">Experience</a>
+                <a href="#awards" class="nav-item">Awards</a>
+                <a href="#contact" class="nav-item">Contact</a>
+            </div>
         </div>
     </nav>
 
-    <div class="hero">
-        <h1>사람을 위한 기술,<br><span class="gradient-text">더 나은 경험</span>을 설계합니다.</h1>
-        <p>광운대학교 데이터 사이언스 전공 기반의 데이터 분석력과 프론트엔드 구현력을 결합하여, 인간과 AI의 정밀한 상호작용(HCI)을 설계하고 실무 시스템으로 구현합니다.</p>
+    <div class="main-wrapper">
+
+        <div class="hero">
+            <h1>사람을 위한 기술,<br><span class="gradient-text">더 나은 경험</span>을 설계합니다.</h1>
+            <p>광운대학교 데이터 사이언스 전공 기반의 데이터 분석력과 프론트엔드 구현력을 결합하여, 인간과 AI의 정밀한 상호작용(HCI)을 설계하고 실무 시스템으로 구현합니다.</p>
+        </div>
+
+        <section id="ongoing" class="page-section">
+            <h2 class="section-title">Ongoing Research <span class="badge-count">1</span></h2>
+            <div class="project-grid">
+                <div class="project-card large" onclick="showDetail('p1')">
+                    <div class="status-tag active">Researching</div>
+                    <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+                    <div class="img-box" style="display:flex; align-items:center; justify-content:center; color:var(--text-main); font-size:2.5rem; font-weight:900; letter-spacing: 2px; font-family: monospace;">VLA</div>
+                    <div class="info-overlay">
+                        <h3>VLA 기반 로봇 인터랙션 연구</h3>
+                        <p>자연어 지시를 로봇의 실질적 행동으로 연결하는 상호작용 구조 설계</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="completed" class="page-section" style="border-top: 1px solid var(--border-line);">
+            <h2 class="section-title">Completed Works <span class="badge-count">4</span></h2>
+            <div class="project-grid">
+                <div class="project-card large" onclick="showDetail('p5')">
+                    <div class="status-tag">Completed</div>
+                    <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+                    <div class="img-box"><img src="src/feedbackpage.jpg" alt="발표의 숲"></div>
+                    <div class="info-overlay">
+                        <h3>발표의 숲: AI 실시간 면접 훈련 플랫폼</h3>
+                        <p>시선, 표정, 음성 데이터를 실시간 분석하여 즉각적인 피드백을 제공하는 플랫폼입니다.</p>
+                    </div>
+                </div>
+                <div class="project-card" onclick="showDetail('p3')">
+                    <div class="status-tag">Completed</div>
+                    <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+                    <div class="img-box contain-img"><img src="figure2.jpg" alt="대화형 AI 할루시네이션 선제 예측 연구 아키텍처"></div>
+                    <div class="info-overlay">
+                        <h3>대화형 AI 할루시네이션 선제 예측 연구</h3>
+                        <p>다이얼로그 히스토리 토큰을 분석해 다음 턴의 할루시네이션 위험을 조기 경보하는 예측 논문입니다.</p>
+                    </div>
+                </div>
+                <div class="project-card" onclick="showDetail('p4')">
+                    <div class="status-tag">Completed</div>
+                    <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+                    <div class="img-box"><img src="arriview.jpg" alt="ArriView 서비스 대시보드"></div>
+                    <div class="info-overlay">
+                        <h3>ArriView: 실시간 대안 경로 추천 엔진</h3>
+                        <p>다중 스케일 시공간 그래프 신경망 기술로 이동 효율 및 도심 인파 혼잡 대안 공간을 정밀 추천합니다.</p>
+                    </div>
+                </div>
+                <div class="project-card" onclick="showDetail('p2')">
+                    <div class="status-tag">Completed</div>
+                    <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+                    <div class="img-box"><img src="src2/landingpage.jpg" alt="Simvex"></div>
+                    <div class="info-overlay">
+                        <h3>Simvex: Web-based 3D 시각화 플랫폼</h3>
+                        <p>웹 기반 3D 시뮬레이션 플랫폼을 통해 복잡한 시공간 데이터를 구현했습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="page-section" style="border-top: 1px solid var(--border-line);">
+            <h2 class="section-title">Work Experience <span class="badge-count">4</span></h2>
+            <div class="timeline-container">
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <h3 class="timeline-title">☁️ AWS Student Builder Group in KWU 4th</h3>
+                            <span class="timeline-period">2026.03 - 2026.07</span>
+                        </div>
+                        <div class="timeline-institution-line">
+                            <div class="info-item">
+                                <span class="badge label-institution">기관명</span>
+                                <span class="content">AWS Korea / 교내</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="badge label-activity">담당 활동</span>
+                                <span class="content">클라우드 및 AI 기반 프로젝트 및 스터디 활동</span>
+                            </div>
+                        </div>
+                        <p class="timeline-desc">AWS 기반 클라우드 아키텍처와 생성형 AI 기술을 학습하며 팀 프로젝트와 스터디 활동을 진행했습니다. 특히 Amazon Bedrock을 활용한 생성형 AI 프로젝트를 수행하며 RAG, 서버 구조 설계, 서비스 아키텍처 구성 등 실제 서비스 환경을 고려한 기술을 경험했습니다. 또한 ACC 자격증 소모임에 참여하여 AWS 핵심 서비스와 클라우드 기초 지식을 꾸준히 학습하며 클라우드 활용 역량을 키워나갑습니다.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <h3 class="timeline-title">📱 삼성 Gen Z Lab. Campus Connect</h3>
+                            <span class="timeline-period">2025.07</span>
+                        </div>
+                        <div class="timeline-institution-line">
+                            <div class="info-item">
+                                <span class="badge label-institution">기관명</span>
+                                <span class="content">삼성전자</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="badge label-activity">담당 활동</span>
+                                <span class="content">사용자 온보딩 UX 개선 프로젝트 수행</span>
+                            </div>
+                        </div>
+                        <p class="timeline-desc">사용자 온보딩 과정에서 발생할 수 있는 불편 요소를 분석하고, 사용자 경험(UX) 관점에서 진입 장벽을 낮추기 위한 개선 아이디어를 도출했습니다. 삼성전자 본사에 방문하여 온보딩 UX 개선 방향에 대해 발표했으며, 이후 MX 사업부 현업 멘토링을 통해 기술적 구현 가능성, 서비스 기획 과정, 실제 업무 환경에 대한 궁금증을 해소할 수 있었습니다. 이를 통해 사용자 경험과 기술적 현실성을 함께 고려하는 문제 해결 관점을 학습했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <h3 class="timeline-title">📕 인간컴퓨터상호작용 전공학술모임 (CHIC)</h3>
+                            <span class="timeline-period">2025.03 - 현재</span>
+                        </div>
+                        <div class="timeline-institution-line">
+                            <div class="info-item">
+                                <span class="badge label-institution">기관명</span>
+                                <span class="content">CHIC</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="badge label-activity">담당 활동</span>
+                                <span class="content">딥러닝 스터디 운영 및 HCI 연구 프로젝트 참여</span>
+                            </div>
+                        </div>
+                        <p class="timeline-desc">전공학술모임 CHIC에서 딥러닝 스터디 조장을 맡아 모델의 학습 메커니즘, 신경망 구조, 주요 알고리즘에 대해 함께 학습하고 실습하는 활동을 운영했습니다. 또한 코딩 테스트 스터디 조장으로서 문제 풀이와 학습 일정을 관리하며 알고리즘 기초 역량을 강화했습니다. 이와 함께 HCI 관련 프로젝트에 참여하여 사용자 경험을 고려한 서비스 아이디어를 구체화하고, 포스터 추천 시스템 등 실제 데이터 기반 서비스를 설계하며 기술적 실행력และ 사용자 중심 설계 역량을 함께 키웠습니다.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <h3 class="timeline-title">🦁 멋쟁이사자처럼 11th</h3>
+                            <span class="timeline-period">2023.01 - 2023.12</span>
+                        </div>
+                        <div class="timeline-institution-line">
+                            <div class="info-item">
+                                <span class="badge label-institution">기관명</span>
+                                <span class="content">교내 멋쟁이 사자처럼</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="badge label-activity">담당 활동</span>
+                                <span class="content">백엔드 개발 및 프로젝트 기획</span>
+                            </div>
+                        </div>
+                        <p class="timeline-desc">교내 멋쟁이사자처럼 11기로 활동하며 웹 서비스의 기획, 개발, 배포까지 이어지는 전반적인 개발 프로세스를 경험했습니다. 백엔드 개발 역할을 맡아 서비스에 필요한 데이터 구조와 기능 흐름을 설계하고, 팀원들과 협업하며 실제 사용자를 고려한 기능 구현 과정을 학습했습니다. 또한 통합 할인 혜택 조회 서비스 등 다양한 서비스 아이디어를 제안하며 프로젝트의 방향성을 구체화하는 데 기여했습니다. 이를 통해 단순 구현을 넘어 문제 정의, 서비스 기획, 협업 기반 개발 역량을 함께 키울 수 있었습니다.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="awards" class="page-section" style="border-top: 1px solid var(--border-line);">
+            <h2 class="section-title">Honors & Awards</h2>
+            <div class="award-grid">
+                <div class="award-card" onclick="showDetail('a1')">
+                    <div class="award-badge">우수상 🏆</div>
+                    <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+                    <span class="award-date">2025.05</span>
+                    <h3>The 'Pay언'한 핀테크 서비스 해커톤</h3>
+                    <p>시니어 세대의 디지털 금융 소외 해소를 위한 아날로그 필기 전표 기반의 노인 맞춤형 이체 서비스 '종이통장' 설계</p>
+                </div>
+                <div class="award-card" onclick="showDetail('a2')">
+                    <div class="award-badge">우수상 🏆</div>
+                    <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+                    <span class="award-date">2025.09</span>
+                    <h3>H.O.P.E 창의보조공학 경진대회</h3>
+                    <p>얼굴 마비 환자의 자가 재활을 돕는 Google ML Kit 및 칼만 필터 신호 안정화 기반 보조공학적 AR 피드백 시스템 개발</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="page-section">
+            <h2 class="section-title" style="display:inline-block">Contact</h2>
+            <div class="contact-grid">
+                <a href="mailto:seoyoung8939@gmail.com" class="contact-card-btn">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="24" height="24" style="fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round;">
+                            <path fill="none" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <span class="label">Email</span>
+                    <span class="value">seoyoung8939@gmail.com</span>
+                </a>
+                <a href="https://github.com/csy030922" target="_blank" class="contact-card-btn">
+                    <div class="icon-wrapper">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.082.824-.26.824-.578 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 3.07 1.305 3.759.994.108-.776.151-1.305.197-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    </div>
+                    <span class="label">GitHub</span>
+                    <span class="value">csy030922</span>
+                </a>
+            </div>
+        </section>
+
     </div>
 
-    <!-- Ongoing Research Section -->
-    <section id="ongoing">
-        <h2 class="section-title">Ongoing Research <span class="badge-count">1</span></h2>
-        <div class="project-grid">
-            <div class="project-card large" onclick="showDetail('p1')">
-                <div class="status-tag active">Researching</div>
-                <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-                <div class="img-box" style="background:#1A1A1A; display:flex; align-items:center; justify-content:center; color:white; font-size:2rem; font-weight:900;">VLA</div>
-                <div class="info-overlay">
-                    <h3>VLA 기반 로봇 인터랙션 연구</h3>
-                    <p>자연어 지시를 로봇의 실질적 행동으로 연결하는 상호작용 구조 설계</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Completed Works Section -->
-    <section id="completed" style="border-top: 1px solid #f0f0f0;">
-        <h2 class="section-title">Completed Works <span class="badge-count">4</span></h2>
-        <div class="project-grid">
-            <div class="project-card large" onclick="showDetail('p5')">
-                <div class="status-tag">Completed</div>
-                <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-                <div class="img-box"><img src="src/feedbackpage.jpg" alt="발표의 숲"></div>
-                <div class="info-overlay">
-                    <h3>발표의 숲: AI 실시간 면접 훈련 플랫폼</h3>
-                    <p>시선, 표정, 음성 데이터를 실시간 분석하여 즉각적인 피드백을 제공하는 플랫폼입니다.</p>
-                </div>
-            </div>
-            <div class="project-card" onclick="showDetail('p3')">
-                <div class="status-tag">Completed</div>
-                <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-                <div class="img-box contain-img"><img src="figure2.jpg" alt="대화형 AI 할루시네이션 선제 예측 연구 아키텍처"></div>
-                <div class="info-overlay">
-                    <h3>대화형 AI 할루시네이션 선제 예측 연구</h3>
-                    <p>다이얼로그 히스토리 토큰을 분석해 다음 턴의 할루시네이션 위험을 조기 경보하는 예측 논문입니다.</p>
-                </div>
-            </div>
-            <div class="project-card" onclick="showDetail('p4')">
-                <div class="status-tag">Completed</div>
-                <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-                <div class="img-box"><img src="arriview.jpg" alt="ArriView 서비스 대시보드"></div>
-                <div class="info-overlay">
-                    <h3>ArriView: 실시간 대안 경로 추천 엔진</h3>
-                    <p>다중 스케일 시공간 그래프 신경망 기술로 이동 효율 및 도심 인파 혼잡 대안 공간을 정밀 추천합니다.</p>
-                </div>
-            </div>
-            <div class="project-card" onclick="showDetail('p2')">
-                <div class="status-tag">Completed</div>
-                <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-                <div class="img-box"><img src="src2/landingpage.jpg" alt="Simvex"></div>
-                <div class="info-overlay">
-                    <h3>Simvex: Web-based 3D 시각화 플랫폼</h3>
-                    <p>웹 기반 3D 시뮬레이션 플랫폼을 통해 복잡한 시공간 데이터를 구현했습니다.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Awards Section (화살표 가시화 레이아웃 컴포넌트 추가 완료) -->
-    <section id="awards" style="background-color: #ffffff; border-top: 1px solid #f0f0f0;">
-        <h2 class="section-title">Honors & Awards</h2>
-        <div class="award-grid">
-            <div class="award-card" onclick="showDetail('a1')">
-                <div class="award-badge">우수상 🏆</div>
-                <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-                <span class="award-date">2025.05</span>
-                <h3>The 'Pay언'한 핀테크 서비스 해커톤</h3>
-                <p>시니어 세대의 디지털 금융 소외 해소를 위한 아날로그 필기 전표 기반의 노인 맞춤형 이체 서비스 '종이통장' 설계 및 우수상 수상</p>
-            </div>
-            <div class="award-card" onclick="showDetail('a2')">
-                <div class="award-badge">우수상 🏆</div>
-                <div class="arrow-icon"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
-                <span class="award-date">2025.09</span>
-                <h3>H.O.P.E 창의보조공학 경진대회</h3>
-                <p>얼굴 마비 환자의 자가 재활을 돕는 Google ML Kit 및 칼만 필터 신호 안정화 기반 보조공학적 AR 피드백 시스템 개발 및 우수상 수상</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 카드형 인터랙티브 Contact 섹션 -->
-    <section id="contact">
-        <h2 class="section-title" style="display:inline-block">Contact</h2>
-        <div class="contact-grid">
-            <a href="mailto:seoyoung8939@gmail.com" class="contact-card-btn">
-                <div class="icon-wrapper">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                </div>
-                <span class="label">Email</span>
-                <span class="value">seoyoung8939@gmail.com</span>
-            </a>
-            <a href="https://github.com/csy030922" target="_blank" class="contact-card-btn">
-                <div class="icon-wrapper">
-                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.082.824-.26.824-.578 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 3.07 1.305 3.759.994.108-.776.151-1.305.197-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                </div>
-                <span class="label">GitHub</span>
-                <span class="value">csy030922</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- 레이어 모달 구조 -->
     <div id="detailViewer" onclick="closeModalOutside(event)">
         <div class="modal-window">
-            <div class="close-btn" onclick="closeDetail()">✕</div>
+            <div class="modal-header-sticky">
+                <div class="close-btn" onclick="closeDetail()">✕</div>
+            </div>
             <div id="detailContent" class="detail-content"></div>
         </div>
     </div>
 
+    <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="테마 변경">
+        <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+
     <script>
+        // 테마 토글 핸들러
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }
+
+        // 스크롤 시 왼쪽 바 메뉴 실시간 하이라이트 감지 로직
+        const sections = document.querySelectorAll('.page-section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const options = {
+            root: null,
+            rootMargin: '0px 0px -40% 0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navItems.forEach(item => {
+                        if (item.getAttribute('href') === `#${id}`) {
+                            item.classList.add('active');
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, options);
+
+        sections.forEach(section => observer.observe(section));
+
         const projectDetails = {
             p1: { 
                 title: "VLA 기반 로봇 인터랙션 연구", 
@@ -321,12 +818,9 @@
                     <h4>3. 확률 합성 및 대안 추천 파이프라인</h4>
                     <p>이동시간 변동성(Lognormal), 예측 오차, 큐잉 이론(M/M/c) 대기시간 분포를 Sobol QMC 기법으로 결합하여 최종 성공 확률(P_success)을 산출합니다. 예측 실패 구간(FAIL) 감지 시 반경 500m 내의 근접성, 혼잡도 개선도를 다차원 점수화하여 실시간 최적 Top-k 대안 장소를 연동 제시합니다.</p>
                     <div class="btn-container">
-                        <a href="https://arri-view.vercel.app/" target="_blank" class="action-link-btn">
+                        <a href="https://arri-view.vercel.app/" target="_blank" class="action-link-btn secondary">
                             ArriView 웹 데모 보러가기 
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                        </a>
-                        <a href="./산학협력캡스톤설계 최종 발표 (1).pdf" download class="action-link-btn secondary">
-                            최종 발표자료 다운로드
                         </a>
                     </div>
                 ` 
@@ -342,7 +836,7 @@
                         <img src="src/landingpage_2.jpg" alt="랜딩 페이지 2">
                     </div>
                     <h4>2. 핵심 기능: 인텔리전트 코칭</h4>
-                    <p>발화 속도와 침묵 구간을 감지하는 음성 분석과 더불어 시선의 분산도를 실시간으로 추적합니다.</p>
+                    <p>발화 속도 and 침묵 구간을 감지하는 음성 분석과 더불어 시선의 분산도를 실시간으로 추적합니다.</p>
                     <img src="src/introduc.jpg" alt="기능 소개">
                     <h4>3. 인터랙티브 실시간 피드백</h4>
                     <p>MediaPipe 기술을 활용해 시선 및 자세를 추적하며, 이상 감지 시 즉각적인 시각적 인터랙션을 제공합니다.</p>
@@ -352,15 +846,32 @@
                 `
             },
             p2: { 
-                title: "Simvex: Web-based 3D 시각화 플랫폼", 
-                tags: "#Three.js #React #Visualization",
+                title: "Simvex: Web-based 3D 시각화 및 엔지니어링 학습 플랫폼", 
+                tags: "#Three.js #React #Vite #3D_Visualization #Web_Graphics",
                 content: `
-                    <h4>1. 프로젝트 개요</h4>
-                    <p>여러 3D 모델을 목록으로 표시하고 시공간 데이터를 직관적으로 구현한 플랫폼입니다.</p>
-                    <img src="src2/landingpage.jpg" alt="랜딩 페이지">
-                    <h4>2. 시뮬레이터</h4>
-                    <p>3D 모델을 시뮬레이션하여 사용자와 상호작용할 수 있는 환경을 제공합니다.</p>
-                    <img src="src2/simulator.jpg" alt="시뮬레이터">
+                    <h4>1. 프로젝트 개요 및 대시보드</h4>
+                    <p>Simvex는 복잡한 하드웨어 구조 및 시공간 데이터를 웹 환경에서 직관적으로 탐색하고 시뮬레이션할 수 있도록 설계된 인터랙티브 3D 엔지니어링 학습 플랫폼입니다. 반응형 대시보드를 통해 다양한 엔지니어링 프로젝트(Suspension, V4 Engine, Robot Arm 등)를 한눈에 관리하고 선택할 수 있습니다.</p>
+                    <img src="src2/landingpage.jpg" alt="Simvex 프로젝트 대시보드" style="max-width: 80%; display: block; margin: 20px auto;">
+
+                    <h4>2. 단일 부품 레이아웃</h4>
+                    <p>선택한 엔지니어링 모델의 전체적인 완제품 구조를 다각도에서 열람할 수 있는 메인 분석 인터페이스입니다. 마우스 드래그를 통한 자유로운 확대, 축소, 초기화 기능과 함께 우측 레이아웃을 통해 해당 장치의 거시적인 스펙과 완제품 정보 설명을 실시간으로 제공합니다.</p>
+                    <img src="src2/single.jpg" alt="조립도 메인 분석 화면" style="max-width: 80%; display: block; margin: 20px auto;">
+
+                    <h4>3. 단일 부품 세부 분석 및 AI / 메모 기능</h4>
+                    <p>좌측의 스크롤 가능한 부품 선택 네비게이터를 통해 특정 컴포넌트(예: Connecting Rod)만 개별적으로 3D 뷰어에 출력할 수 있습니다. 중앙의 부품 정보 조회 섹션에서 해당 부품의 재질(합금강, 티타늄 합금 등) 및 상세 메커니즘 설명을 확인할 수 있으며, 우측의 서브 AI 어시스턴트 연동을 통해 실시간 AI 분석 요청 및 학습 내용을 기록할 수 있는 저장형 메모장 기능을 탑재했습니다.</p>
+                    <img src="src2/AI.jpg" alt="단일 부품 분석 및 부가 기능 인터페이스" style="max-width: 45%; display: block; margin: 20px auto;">
+
+                    <h4>4. 단계별 조립 가이드 모드</h4>
+                    <p>컴포넌트의 유기적인 결합 순서와 메커니즘을 시각적으로 학습할 수 있도록 '단계별 조립 모드'를 지원합니다. 사용자가 부품을 클릭하면 제자리로 조립되는 인터랙션을 구현했으며, 전체 분해 및 단축키(F: 전체화면) 대응 시스템을 통해 학습 편의성을 극대화했습니다.</p>
+                    <img src="src2/guide.jpg" alt="단계별 조립 가이드 인터페이스" style="max-width: 80%; display: block; margin: 20px auto;">
+
+                    <h4>5. 자유 시뮬레이터 환경</h4>
+                    <p>3D 공간 내에서 완제품을 마우스 좌클릭(모델 회전), 우클릭(시점 이동), 휠(확대/축소)을 이용해 완벽히 제어할 수 있는 시뮬레이터 환경을 제공합니다. <code>Shift + 드래그</code> 조합을 활용한 유연한 분해 및 조립 시뮬레이션을 통해 장치의 물리적 가동 상태를 직관적으로 이해할 수 있도록 돕습니다.</p>
+                    <img src="src2/simulator.jpg" alt="자유 시뮬레이터 물리 제어 화면" style="max-width: 80%; display: block; margin: 20px auto;">
+
+                    <h4>6. 코칭 컨트롤 패널 및 Ghost 모드</h4>
+                    <p>학습 집중도를 높이기 위해 AI 어시스턴트 가이드 패널, 투명도 조정을 통해 내부 구조를 투영해 볼 수 있는 <strong>Ghost Mode 활성화 기능</strong>, 그리고 자기주도적 학습 요약을 위한 메모 컴포넌트 등 세부 인터랙션 요소들이 모듈화된 우측 사이드 바 UI 레이아웃을 정밀하게 설계했습니다.</p>
+                    <img src="src2/lego.jpg" alt="코칭 및 컨트롤 사이드 패널 상세" style="max-width: 80%; display: block; margin: 20px auto;">
                 `
             },
             a1: {
@@ -374,7 +885,6 @@
                     <h4>3. 기술 및 데이터 추출 아키텍처</h4>
                     <p>촬영된 수기 이미지 데이터를 GPT API 전송 파이프라인과 연동하여 고정 프롬프트 제어를 통해 정확한 JSON 데이터 포맷(bank, account_number, name, amount)으로 구조화해 전처리합니다. 추출된 데이터를 실시간 매핑하여 로컬 DB에 안정적으로 정합하는 데이터 추출 자동화를 성공적으로 구현했습니다.</p>
                     <div class="btn-container">
-                        <!-- 💛 정확한 해커톤 파일명으로 동적 다운로드 패스 수정 완료 💛 -->
                         <a href="./The_'Pay언'한_핀테크_서비스_해커톤.pdf" download class="action-link-btn secondary">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                             해커톤 발표자료(PDF) 다운로드
