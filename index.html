@@ -458,12 +458,20 @@
         #contact { text-align: center; padding: 140px 8% 120px; background: var(--contact-grad); border-radius: 0; box-shadow: none; transition: background 0.4s ease; }
         .contact-grid { display: flex; justify-content: center; gap: 28px; max-width: 760px; margin: 4rem auto 0; }
         .contact-card-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 2rem; background: var(--card-bg); border-radius: 24px; border: 1px solid var(--card-border); text-decoration: none; color: var(--text-main); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        button.contact-card-btn { font: inherit; cursor: pointer; }
         .contact-card-btn:hover { transform: translateY(-10px); background: var(--card-bg); box-shadow: 0 25px 50px rgba(15, 15, 25, 0.05), 0 0 0 1px var(--accent-color); }
         .contact-card-btn .icon-wrapper { width: 60px; height: 60px; background: var(--bg); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-main); border: 1px solid var(--card-border); }
         .contact-card-btn:hover .icon-wrapper { background: var(--primary); color: #111113; transform: scale(1.05); }
         .contact-card-btn .icon-wrapper svg { width: 24px; height: 24px; fill: currentColor; }
         .contact-card-btn span.label { font-size: 0.85rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.4rem; }
         .contact-card-btn span.value { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.3px; color: var(--text-main); }
+        .copy-toast {
+            position: fixed; left: 50%; bottom: 34px; transform: translate(-50%, 16px);
+            padding: 12px 18px; border-radius: 999px; background: var(--text-main); color: var(--bg);
+            font-size: 0.92rem; font-weight: 800; opacity: 0; pointer-events: none; z-index: 3000;
+            box-shadow: 0 12px 34px rgba(0,0,0,0.16); transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .copy-toast.show { opacity: 1; transform: translate(-50%, 0); }
 
         @media (max-width: 768px) {
             .info-item { align-items: flex-start; }
@@ -494,7 +502,7 @@
                 <h3>연락처</h3>
                 <ul class="info-list">
                     <li>📞 +82 1080138939</li>
-                    <li>✉️ <a href="mailto:seoyoung8939@gmail.com">seoyoung8939@gmail.com</a></li>
+                    <li>✉️ <a href="#" onclick="copyEmail(event)">seoyoung8939@gmail.com</a></li>
                     <li>📍 Seoul, South Korea</li>
                     <li>🌐 <a href="https://github.com/csy030922" target="_blank">github.com/csy030922</a></li>
                 </ul>
@@ -513,14 +521,14 @@
                 <ul class="info-list" style="margin-bottom: 0;">
                     <li>🏢 광운대학교</li>
                     <li>🎓 정보융합학부 데이터사이언스 전공</li>
-                    <li>📊 3.6 / 4.5</li>
+                    <li>📊 3.67 / 4.5</li>
                 </ul>
             </div>
         </div>
         
         <div class="nav-center-wrapper">
             <div class="nav-links">
-                <a href="#ongoing" class="nav-item">Research</a>
+                <a href="#ongoing" class="nav-item">Ongoing</a>
                 <a href="#completed" class="nav-item">Projects</a>
                 <a href="#experience" class="nav-item">Experience</a>
                 <a href="#awards" class="nav-item">Awards</a>
@@ -707,7 +715,7 @@
         <section id="contact" class="page-section">
             <h2 class="section-title" style="display:inline-block">Contact</h2>
             <div class="contact-grid">
-                <a href="mailto:seoyoung8939@gmail.com" class="contact-card-btn">
+                <button type="button" class="contact-card-btn" onclick="copyEmail(event)">
                     <div class="icon-wrapper">
                         <svg viewBox="0 0 24 24" width="24" height="24" style="fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round;">
                             <path fill="none" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -716,7 +724,7 @@
                     </div>
                     <span class="label">Email</span>
                     <span class="value">seoyoung8939@gmail.com</span>
-                </a>
+                </button>
                 <a href="https://github.com/csy030922" target="_blank" class="contact-card-btn">
                     <div class="icon-wrapper">
                         <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.082.824-.26.824-.578 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 3.07 1.305 3.759.994.108-.776.151-1.305.197-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
@@ -737,6 +745,7 @@
             <div id="detailContent" class="detail-content"></div>
         </div>
     </div>
+    <div id="copyToast" class="copy-toast" role="status" aria-live="polite">이메일이 복사됐어요</div>
 
     <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="테마 변경">
         <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -928,6 +937,34 @@
         function closeModalOutside(event) {
             if (event.target.id === 'detailViewer') {
                 closeDetail();
+            }
+        }
+
+        function showCopyToast(message = '이메일이 복사됐어요') {
+            const toast = document.getElementById('copyToast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(window.copyToastTimer);
+            window.copyToastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 1800);
+        }
+
+        async function copyEmail(event) {
+            event.preventDefault();
+            const email = 'seoyoung8939@gmail.com';
+
+            try {
+                await navigator.clipboard.writeText(email);
+                showCopyToast();
+            } catch (error) {
+                const tempInput = document.createElement('input');
+                tempInput.value = email;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                tempInput.remove();
+                showCopyToast();
             }
         }
     </script>
