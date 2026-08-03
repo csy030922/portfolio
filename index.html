@@ -8,8 +8,8 @@
     <style>
         /* 기본 라이트 모드 (프리미엄 미니멀) */
         :root {
-            --primary: #FFD600;
-            --primary-hover: #E6BF00;
+            --primary: #B8B8B8;
+            --primary-hover: #A3A3A3;
             --bg: #FAFAFC;
             --card-bg: #ffffff;
             --text-main: #111113;
@@ -19,7 +19,7 @@
             --card-border: rgba(0, 0, 0, 0.04);
             --modal-overlay: rgba(15, 15, 20, 0.35);
             --modal-bg: #ffffff;
-            --glow-1: rgba(255, 214, 0, 0.15);
+            --glow-1: rgba(0, 0, 0, 0.06);
             --glow-2: rgba(58, 102, 255, 0.06);
             --status-bg: rgba(0, 0, 0, 0.04);
             --status-text: #111113;
@@ -103,7 +103,7 @@
         nav::-webkit-scrollbar { display: none; }
         
         .nav-top-block { width: 100%; display: flex; flex-direction: column; gap: 1.2rem; }
-        .logo { font-weight: 900; font-size: 1.4rem; letter-spacing: -0.5px; cursor: pointer; color: var(--text-main); line-height: 1.2; margin-bottom: 0.5rem; }
+        .logo { appearance: none; border: 0; background: transparent; padding: 0; text-align: left; font-family: inherit; font-weight: 900; font-size: 1.4rem; letter-spacing: -0.5px; cursor: pointer; color: var(--text-main); line-height: 1.2; margin-bottom: 0.5rem; }
         
         /* 프로필 이미지 박스 */
         .profile-img-frame { 
@@ -127,8 +127,9 @@
         .info-section h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.6rem; padding-bottom: 6px; border-bottom: 1px solid var(--border-line); letter-spacing: -0.5px; }
         .info-list { display: flex; flex-direction: column; gap: 0.5rem; list-style: none; font-size: 0.88rem; color: var(--text-main); font-weight: 550; }
         .info-list li { display: flex; align-items: center; gap: 10px; word-break: break-all; line-height: 1.4; }
-        .info-list li a { color: var(--text-main); text-decoration: none; border-bottom: 1px dashed var(--text-sub); transition: 0.2s; }
-        .info-list li a:hover { color: var(--hero-point-color); border-bottom-color: var(--hero-point-color); }
+        .info-list li a, .info-list li button { color: var(--text-main); text-decoration: none; border-bottom: 1px dashed var(--text-sub); transition: 0.2s; }
+        .info-list li button { appearance: none; border-top: 0; border-left: 0; border-right: 0; background: transparent; padding: 0; font: inherit; cursor: pointer; }
+        .info-list li a:hover, .info-list li button:hover { color: var(--hero-point-color); border-bottom-color: var(--hero-point-color); }
 
         /* 학력/목차 간 여백 */
         .nav-center-wrapper { display: flex; flex-direction: column; gap: 2.5rem; width: 100%; margin-top: 3.5rem; }
@@ -184,7 +185,7 @@
             align-items: flex-start; text-align: left; padding: 0 10%; position: relative;
         }
         .hero h1 { font-size: clamp(2.5rem, 5.2vw, 3.8rem); font-weight: 850; line-height: 1.25; letter-spacing: -2.5px; margin-bottom: 2.2rem; color: var(--text-main); }
-        .gradient-text { background: none; -webkit-background-clip: initial; -webkit-text-fill-color: initial; color: var(--hero-point-color); transition: color 0.4s ease; }
+        .gradient-text { background: none; background-clip: initial; -webkit-background-clip: initial; -webkit-text-fill-color: initial; color: var(--hero-point-color); transition: color 0.4s ease; }
         .hero p { font-size: 1.15rem; color: var(--text-sub); max-width: 740px; line-height: 1.85; word-break: keep-all; font-weight: 500; }
 
         /* Section Layouts */
@@ -316,10 +317,6 @@
 
         /* Honors & Awards Section */
         /* 💡 섹션 자체의 패딩은 건드리지 않아 제목 열을 다른 섹션과 완벽히 일치시킵니다. */
-        #awards {
-            /* 기존 padding: 90px 4% 지우기 (기본 section의 8%를 따르도록) */
-        }
-
         /* 💡 타이틀 열은 유지하되, 하단 카드 박스들만 좌우로 더 널찍하게 확장하는 구조 */
         .award-grid { 
             display: grid; 
@@ -368,22 +365,22 @@
             position: absolute; 
             top: 28px; 
             left: 30px; 
-            background: #FFFDE7;       /* 아주 연하고 부드러운 옐로우 파스텔 */
-            color: #8D6E63;            /* 💡 가독성을 높여주는 고급스러운 브라운 골드 텍스트 */
-            border: 1px solid #FFE082; /* 연한 골드빛 테두리 */
+            background: #F4F4F4;       /* 아주 연하고 부드러운 옐로우 파스텔 */
+            color: #444444;            /* 💡 가독성을 높여주는 고급스러운 브라운 골드 텍스트 */
+            border: 1px solid #D0D0D0; /* 연한 골드빛 테두리 */
             padding: 6px 16px; 
             border-radius: 14px; 
             font-size: 0.8rem; 
             font-weight: 800; 
-            box-shadow: 0 4px 10px rgba(255,214,0,0.05); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
             transition: all 0.4s ease; 
         }
 
         /* 🌙 다크모드는 원래의 사이버 네온 옐로우 느낌이 잘 보이므로 그대로 유지 */
         [data-theme="dark"] .award-badge { 
-            background: rgba(255, 214, 0, 0.1); 
-            color: #FFD600; 
-            border: 1px solid #FFD600;
+            background: rgba(255, 255, 255, 0.08); 
+            color: #B8B8B8; 
+            border: 1px solid #B8B8B8;
             border-radius: 8px; 
         }
         .award-card h3 { font-size: 1.5rem; font-weight: 800; margin-top: 8px; margin-bottom: 10px; letter-spacing: -0.6px; padding-right: 45px; color: var(--text-main); }
@@ -416,6 +413,7 @@
             transition: background-color 0.4s ease, border-bottom 0.4s ease;
         }
         .close-btn { 
+            appearance: none; font: inherit;
             width: 46px; height: 46px; background: var(--close-btn-bg); color: var(--close-btn-text); border-radius: 50%; 
             display: flex; align-items: center; justify-content: center; cursor: pointer; 
             font-weight: 700; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -451,7 +449,7 @@
         }
         [data-theme="dark"] .action-link-btn { border-radius: 14px; background: rgba(255, 255, 255, 0.06); color: #fff; }
         .action-link-btn:hover { background: var(--text-main); color: var(--bg); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
-        .action-link-btn.secondary { background: var(--primary); color: #111113; box-shadow: 0 6px 20px rgba(255,214,0,0.2); border: none; }
+        .action-link-btn.secondary { background: var(--primary); color: #111113; box-shadow: 0 6px 20px rgba(0,0,0,0.16); border: none; }
         .action-link-btn.secondary:hover { background: var(--primary-hover); transform: translateY(-3px); }
 
         /* Contact Section */
@@ -483,16 +481,1244 @@
                 height: 44px;
             }
         }
+
+        /* =========================================================
+           INTRO LANDING ANIMATION
+           이름이 먼저 보이고, 역할을 선택하면 포트폴리오가 열립니다.
+        ========================================================= */
+        body.intro-locked {
+            overflow: hidden;
+        }
+
+        body.intro-locked > nav,
+        body.intro-locked > .main-wrapper,
+        body.intro-locked > .theme-toggle-btn {
+            opacity: 0;
+            transform: translateY(28px);
+            pointer-events: none;
+        }
+
+        body > nav,
+        body > .main-wrapper,
+        body > .theme-toggle-btn {
+            transition:
+                opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .intro-screen {
+            --intro-white: #ffffff;
+            --intro-black: #111111;
+            --intro-accent: #555555;
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            min-height: 100dvh;
+            background: var(--intro-white);
+            color: var(--intro-black);
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+            padding: 2.2rem 1.5rem 1.5rem;
+            opacity: 1;
+            transform: translateY(0);
+            transition:
+                transform 0.95s cubic-bezier(0.76, 0, 0.24, 1),
+                opacity 0.7s ease;
+        }
+
+        .intro-screen.is-leaving {
+            transform: translateY(-105%);
+            opacity: 0.98;
+            pointer-events: none;
+        }
+
+        .intro-mini-nav {
+            position: absolute;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            animation: introFadeUp 0.65s 0.5s ease forwards;
+        }
+
+        .intro-mini-nav button {
+            appearance: none;
+            border: 1px solid #181818;
+            border-radius: 999px;
+            background: #fff;
+            color: #111;
+            padding: 5px 12px;
+            font: inherit;
+            font-size: 0.66rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .intro-mini-nav button:hover {
+            background: #111;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .intro-stage {
+            width: min(900px, 94vw);
+            display: grid;
+            grid-template-rows: auto auto;
+            place-items: center;
+            text-align: center;
+            transform: translateY(22px);
+            opacity: 0;
+            animation: introFadeUp 0.85s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .intro-name-scene,
+        .intro-role-scene {
+            grid-area: 1 / 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition:
+                opacity 0.55s ease,
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.55s ease;
+        }
+
+        .intro-name-scene {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .intro-role-scene {
+            opacity: 0;
+            transform: translateY(24px);
+            filter: blur(7px);
+            pointer-events: none;
+        }
+
+        .intro-stage.show-role .intro-name-scene {
+            opacity: 0;
+            transform: translateY(-22px);
+            filter: blur(7px);
+            pointer-events: none;
+        }
+
+        .intro-stage.show-role .intro-role-scene {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            pointer-events: auto;
+        }
+
+        .intro-name-line {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: clamp(1.55rem, 3.6vw, 3.2rem);
+            line-height: 1.3;
+            letter-spacing: 0.08em;
+            font-weight: 500;
+            color: #111;
+        }
+
+        .intro-name-line strong {
+            font: inherit;
+            font-weight: 500;
+        }
+
+        .intro-role-line {
+            min-height: 1.4em;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.18em;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: clamp(1.05rem, 2.4vw, 2rem);
+            line-height: 1.35;
+            letter-spacing: 0.08em;
+            transition: 0.35s ease;
+        }
+
+        .intro-stage.is-complete .intro-role-line {
+            transform: translateY(-2px);
+        }
+
+        .intro-drop-zone {
+            appearance: none;
+            -webkit-appearance: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: inherit;
+            display: inline-flex;
+            align-items: center;
+            min-width: 8.6em;
+            justify-content: center;
+            padding: 0.05em 0.12em 0.14em;
+            color: #7d7d7d;
+            border: 0;
+            border-bottom: 3px solid var(--intro-accent);
+            border-radius: 0;
+            outline: none;
+            font-style: italic;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .intro-drop-zone:focus-visible {
+            outline: 2px dashed #777;
+            outline-offset: 6px;
+        }
+
+        .intro-drop-zone.is-over {
+            color: #111;
+            background: #F2F2F2;
+            box-shadow: 0 0 0 10px #F2F2F2;
+            transform: translateY(-4px);
+        }
+
+        .intro-stage.is-complete .intro-drop-zone {
+            color: #111;
+            font-style: normal;
+        }
+
+        .intro-role-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1.5rem;
+            padding: 10px 13px;
+            border: 1px dashed #222;
+            background: rgba(255,255,255,0.82);
+            transition: 0.35s ease;
+        }
+
+        .intro-stage.is-complete .intro-role-list {
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+        }
+
+        .intro-role {
+            appearance: none;
+            border: 0;
+            background: transparent;
+            color: #181818;
+            padding: 3px 8px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            cursor: grab;
+            user-select: none;
+            transition: 0.2s ease;
+        }
+
+        .intro-role::before { content: '[ '; color: #555555; }
+        .intro-role::after { content: ' ]'; color: #555555; }
+
+        .intro-role:hover {
+            transform: translateY(-3px);
+            color: #555555;
+        }
+
+        .intro-role:active {
+            cursor: grabbing;
+            transform: scale(0.96);
+        }
+
+        .intro-hint {
+            margin-top: 0.8rem;
+            color: #a0a0a0;
+            font-size: 0.7rem;
+            letter-spacing: 0.04em;
+            transition: opacity 0.3s ease;
+        }
+
+        .intro-stage.is-complete .intro-hint {
+            opacity: 0;
+        }
+
+        .intro-doodle {
+            grid-area: 2 / 1;
+            width: clamp(165px, 23vw, 260px);
+            height: auto;
+            margin-top: 0.9rem;
+            overflow: visible;
+        }
+
+        .intro-doodle * {
+            vector-effect: non-scaling-stroke;
+        }
+
+        .intro-doodle .wave-arm {
+            transform-box: fill-box;
+            transform-origin: 16% 90%;
+            animation: introWave 1.35s ease-in-out infinite alternate;
+        }
+
+        .intro-stage.is-complete .intro-doodle .wave-arm {
+            animation-duration: 0.45s;
+        }
+
+        @keyframes introFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes introWave {
+            from { transform: rotate(-6deg); }
+            to { transform: rotate(10deg); }
+        }
+
+        @media (max-width: 768px) {
+            .intro-screen {
+                padding-top: 4.4rem;
+            }
+
+            .intro-mini-nav {
+                top: 18px;
+            }
+
+            .intro-name-line {
+                font-size: clamp(1.15rem, 5.7vw, 1.65rem);
+                letter-spacing: 0.05em;
+            }
+
+            .intro-role-line {
+                font-size: clamp(0.95rem, 5vw, 1.3rem);
+                letter-spacing: 0.04em;
+            }
+
+            .intro-drop-zone {
+                min-width: 7.8em;
+            }
+
+            .intro-role-list {
+                max-width: 92vw;
+                gap: 4px;
+            }
+
+            .intro-role {
+                font-size: 0.62rem;
+                padding: 4px 5px;
+            }
+
+            .intro-hint {
+                font-size: 0.64rem;
+            }
+
+            .intro-doodle {
+                width: min(210px, 52vw);
+                margin-top: 1.15rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .intro-stage,
+            .intro-mini-nav,
+            .intro-doodle .wave-arm {
+                animation: none !important;
+                opacity: 1;
+                transform: none;
+            }
+
+            .intro-screen,
+            body > nav,
+            body > .main-wrapper,
+            body > .theme-toggle-btn {
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+
+        /* =========================================================
+           PORTFOLIO VISUAL SYSTEM — INTRO MATCH
+           콘텐츠 구조와 문구는 유지하고, 색·형태·타이포그래피만 통일합니다.
+        ========================================================= */
+        :root {
+            --primary: #B8B8B8;
+            --primary-hover: #A3A3A3;
+            --bg: #F7F6F1;
+            --card-bg: #FFFFFF;
+            --text-main: #111111;
+            --text-sub: #696969;
+            --accent-color: #B8B8B8;
+            --hero-point-color: #111111;
+            --card-border: #151515;
+            --modal-overlay: rgba(17, 17, 17, 0.52);
+            --modal-bg: #FFFFFF;
+            --status-bg: #ECECEC;
+            --status-text: #111111;
+            --tag-active-bg: #111111;
+            --tag-active-text: #FFFFFF;
+            --tag-completed-bg: #FFFFFF;
+            --tag-completed-text: #111111;
+            --img-overlay: linear-gradient(to top, rgba(17,17,17,.94) 0%, rgba(17,17,17,.60) 52%, transparent 100%);
+            --img-box-bg: #EEECE5;
+            --img-opacity: 1;
+            --nav-bg: #FFFFFF;
+            --border-line: #151515;
+            --close-btn-bg: #FFFFFF;
+            --close-btn-text: #111111;
+            --contact-grad: #F7F6F1;
+            --contact-bg: #FFFFFF;
+            --timeline-line: #151515;
+            --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        }
+
+        [data-theme="dark"] {
+            --primary: #777777;
+            --primary-hover: #8A8A8A;
+            --bg: #111111;
+            --card-bg: #171717;
+            --text-main: #F7F6F1;
+            --text-sub: #B5B2A9;
+            --accent-color: #B8B8B8;
+            --hero-point-color: #F7F6F1;
+            --card-border: #F7F6F1;
+            --modal-overlay: rgba(0,0,0,.74);
+            --modal-bg: #171717;
+            --status-bg: #2A2A2A;
+            --status-text: #F7F6F1;
+            --tag-active-bg: #B8B8B8;
+            --tag-active-text: #111111;
+            --tag-completed-bg: #171717;
+            --tag-completed-text: #F7F6F1;
+            --img-overlay: linear-gradient(to top, rgba(0,0,0,.96) 0%, rgba(0,0,0,.62) 52%, transparent 100%);
+            --img-box-bg: #222222;
+            --nav-bg: #111111;
+            --border-line: #F7F6F1;
+            --close-btn-bg: #171717;
+            --close-btn-text: #F7F6F1;
+            --contact-grad: #111111;
+            --contact-bg: #171717;
+            --timeline-line: #F7F6F1;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-main);
+        }
+
+        .bg-glow-1,
+        .bg-glow-2 {
+            display: none;
+        }
+
+        /* Intro top menu: true page-center alignment */
+        .intro-mini-nav {
+            left: 0;
+            right: 0;
+            width: 100%;
+            transform: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .intro-mini-nav button {
+            font-family: var(--mono);
+            border-radius: 0;
+            border-width: 1.5px;
+            padding: 6px 13px;
+            letter-spacing: .02em;
+        }
+
+        .intro-drop-zone {
+            cursor: default;
+        }
+
+        /* Sidebar */
+        nav {
+            width: 310px;
+            background: var(--nav-bg);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border-right: 1.5px solid var(--border-line);
+            padding: 2rem 1.55rem 1.4rem;
+        }
+
+        .nav-top-block {
+            gap: 1.05rem;
+        }
+
+        .logo {
+            appearance: none;
+            border: 0;
+            background: transparent;
+            padding: 0;
+            text-align: left;
+            font-family: var(--mono);
+            font-size: 1.28rem;
+            line-height: 1.08;
+            letter-spacing: .07em;
+            color: var(--text-main);
+        }
+
+        .profile-img-frame {
+            border-radius: 0;
+            border: 1.5px solid var(--border-line);
+            box-shadow: 7px 7px 0 var(--primary);
+            background: var(--card-bg);
+        }
+
+        .info-section {
+            margin-top: .35rem;
+        }
+
+        .info-section h3 {
+            font-family: var(--mono);
+            font-size: .82rem;
+            letter-spacing: .08em;
+            margin-bottom: .65rem;
+            padding-bottom: 6px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .info-list {
+            gap: .58rem;
+            font-size: .83rem;
+            font-weight: 520;
+        }
+
+        .info-list li {
+            gap: 8px;
+        }
+
+        .info-list li a,
+        .info-list li button {
+            appearance: none;
+            border: 0;
+            border-bottom: 1px dashed currentColor;
+            background: transparent;
+            color: var(--text-main);
+            padding: 0;
+            font: inherit;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .nav-center-wrapper {
+            margin-top: 2.25rem;
+        }
+
+        .nav-links {
+            gap: 0;
+            border-top: 1.5px solid var(--border-line);
+        }
+
+        .nav-links a {
+            font-family: var(--mono);
+            font-size: .83rem;
+            letter-spacing: .035em;
+            color: var(--text-main);
+            padding: 11px 6px;
+            border-radius: 0;
+            border-bottom: 1.5px solid var(--border-line);
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .nav-links a:hover,
+        [data-theme="dark"] .nav-links a:hover {
+            color: var(--text-main);
+            background: color-mix(in srgb, var(--primary) 28%, transparent);
+            padding-left: 13px;
+        }
+
+        .nav-links a.active {
+            color: #111111;
+            background: var(--primary);
+            border: 0;
+            border-bottom: 1.5px solid var(--border-line);
+            box-shadow: none;
+            padding-left: 13px;
+        }
+
+        /* Main editorial layout */
+        .main-wrapper {
+            margin-left: 310px;
+            width: calc(100% - 310px);
+        }
+
+        .hero {
+            min-height: 92vh;
+            height: auto;
+            padding: 8rem 9% 6rem;
+            border-bottom: 1.5px solid var(--border-line);
+            background: var(--card-bg);
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            font-family: var(--mono);
+            font-size: clamp(2.4rem, 5.2vw, 5.35rem);
+            font-weight: 500;
+            line-height: 1.14;
+            letter-spacing: -.055em;
+            margin-bottom: 2.6rem;
+        }
+
+        .gradient-text {
+            color: var(--text-main);
+            text-decoration-line: underline;
+            text-decoration-color: var(--primary);
+            text-decoration-thickness: .16em;
+            text-underline-offset: .14em;
+        }
+
+        .hero p {
+            max-width: 780px;
+            color: var(--text-sub);
+            font-size: 1.08rem;
+            line-height: 1.9;
+            border-left: 4px solid var(--primary);
+            padding-left: 1.35rem;
+        }
+
+        section {
+            max-width: 1280px;
+            padding: 105px 7.5%;
+        }
+
+        .page-section + .page-section {
+            border-top: 1.5px solid var(--border-line) !important;
+        }
+
+        .section-title {
+            font-family: var(--mono);
+            font-size: clamp(1.65rem, 3vw, 2.6rem);
+            font-weight: 500;
+            letter-spacing: -.04em;
+            margin-bottom: 3.4rem;
+            padding-bottom: .85rem;
+            border-bottom: 1.5px solid var(--border-line);
+        }
+
+        [data-theme="dark"] .section-title {
+            border-bottom: 1.5px solid var(--border-line);
+            padding-bottom: .85rem;
+        }
+
+        .badge-count {
+            border-radius: 0;
+            border: 1.5px solid var(--border-line);
+            background: var(--primary);
+            color: #111111;
+            font-family: var(--mono);
+            font-size: .76rem;
+            padding: 3px 9px;
+        }
+
+        /* Project cards */
+        .project-grid {
+            gap: 2rem;
+        }
+
+        .project-card {
+            height: 400px;
+            border-radius: 0;
+            border: 1.5px solid var(--card-border);
+            box-shadow: 9px 9px 0 var(--primary);
+            background: var(--card-bg);
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 14px 14px 0 var(--primary);
+        }
+
+        .img-box,
+        .img-box.contain-img img {
+            background: var(--img-box-bg);
+        }
+
+        .status-tag {
+            top: 18px;
+            left: 18px;
+            border-radius: 0;
+            border: 1.5px solid #111111;
+            padding: 7px 12px;
+            font-family: var(--mono);
+            font-size: .72rem;
+            letter-spacing: .035em;
+            box-shadow: 4px 4px 0 var(--primary);
+        }
+
+        [data-theme="dark"] .status-tag {
+            border-radius: 0;
+            border-color: #F7F6F1;
+        }
+
+        .project-card:hover .status-tag {
+            transform: none;
+            background: var(--primary);
+            color: #111111;
+            border-color: #111111;
+        }
+
+        .arrow-icon {
+            top: 18px;
+            right: 18px;
+            width: 42px;
+            height: 42px;
+            border-radius: 0;
+            border: 1.5px solid #111111;
+            background: var(--primary);
+            box-shadow: 4px 4px 0 #111111;
+        }
+
+        [data-theme="dark"] .arrow-icon {
+            border-radius: 0;
+        }
+
+        .info-overlay {
+            padding: 4.2rem 2rem 2rem;
+        }
+
+        .info-overlay h3 {
+            font-family: var(--mono);
+            font-size: 1.28rem;
+            font-weight: 600;
+            letter-spacing: -.035em;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            padding-left: 2.25rem;
+        }
+
+        .timeline-container::before {
+            left: 7px;
+            width: 0;
+            border-left: 2px dashed var(--timeline-line);
+            background: transparent;
+        }
+
+        .timeline-dot {
+            left: -2.25rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 0;
+            border: 2px solid var(--text-main);
+            background: var(--bg);
+        }
+
+        .timeline-item:hover .timeline-dot {
+            background: var(--primary);
+        }
+
+        .timeline-content {
+            border-radius: 0;
+            border: 1.5px solid var(--card-border);
+            box-shadow: 8px 8px 0 color-mix(in srgb, var(--primary) 75%, transparent);
+            padding: 2rem 2.25rem;
+        }
+
+        .timeline-content:hover {
+            transform: translate(-3px, -3px);
+            border-color: var(--card-border);
+            box-shadow: 12px 12px 0 var(--primary);
+        }
+
+        .timeline-title,
+        .timeline-period {
+            font-family: var(--mono);
+        }
+
+        .timeline-title {
+            font-size: 1.18rem;
+            font-weight: 600;
+        }
+
+        .badge {
+            border-radius: 0;
+            font-family: var(--mono);
+            border: 1px solid currentColor;
+        }
+
+        .label-institution,
+        .label-activity,
+        [data-theme="dark"] .label-institution,
+        [data-theme="dark"] .label-activity {
+            background: transparent;
+            color: var(--text-main);
+        }
+
+        .content,
+        [data-theme="dark"] .content {
+            color: var(--text-main);
+        }
+
+        /* Awards */
+        .award-grid {
+            margin-left: 0;
+            margin-right: 0;
+            gap: 2rem;
+        }
+
+        .award-card,
+        [data-theme="dark"] .award-card {
+            border-radius: 0;
+            border: 1.5px solid var(--card-border);
+            box-shadow: 9px 9px 0 var(--primary);
+            padding: 4.8rem 2.25rem 2.35rem;
+        }
+
+        .award-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 14px 14px 0 var(--primary);
+        }
+
+        .award-card h3 {
+            font-family: var(--mono);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .award-badge,
+        [data-theme="dark"] .award-badge {
+            top: 24px;
+            left: 24px;
+            border-radius: 0;
+            border: 1.5px solid #111111;
+            background: var(--primary);
+            color: #111111;
+            box-shadow: 4px 4px 0 #111111;
+            font-family: var(--mono);
+        }
+
+        /* Modal */
+        #detailViewer {
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .modal-window {
+            border-radius: 0;
+            border: 1.5px solid var(--card-border);
+            box-shadow: 14px 14px 0 var(--primary);
+        }
+
+        .modal-header-sticky {
+            border-bottom: 1.5px solid var(--border-line);
+        }
+
+        .close-btn,
+        [data-theme="dark"] .close-btn {
+            border-radius: 0;
+            border: 1.5px solid var(--card-border);
+            box-shadow: 4px 4px 0 var(--primary);
+        }
+
+        .detail-content h2,
+        .detail-content h4,
+        .detail-tags {
+            font-family: var(--mono);
+        }
+
+        .detail-content img {
+            border-radius: 0;
+            border: 1.5px solid var(--border-line);
+            box-shadow: 7px 7px 0 color-mix(in srgb, var(--primary) 75%, transparent);
+        }
+
+        .action-link-btn,
+        [data-theme="dark"] .action-link-btn,
+        .action-link-btn.secondary {
+            border-radius: 0;
+            border: 1.5px solid var(--card-border);
+            box-shadow: 5px 5px 0 var(--primary);
+            font-family: var(--mono);
+        }
+
+        /* Contact */
+        #contact {
+            background: var(--contact-grad);
+            border-radius: 0;
+            border-top: 1.5px solid var(--border-line);
+        }
+
+        .contact-grid {
+            max-width: 820px;
+            gap: 2rem;
+        }
+
+        .contact-card-btn {
+            border-radius: 0;
+            border: 1.5px solid var(--card-border);
+            box-shadow: 9px 9px 0 var(--primary);
+        }
+
+        .contact-card-btn:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 14px 14px 0 var(--primary);
+        }
+
+        .contact-card-btn .icon-wrapper {
+            border-radius: 0;
+            border: 1.5px solid var(--card-border);
+        }
+
+        .contact-card-btn span.label,
+        .contact-card-btn span.value {
+            font-family: var(--mono);
+        }
+
+        .copy-toast {
+            border-radius: 0;
+            border: 1.5px solid var(--primary);
+            font-family: var(--mono);
+        }
+
+        .theme-toggle-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 0;
+            border: 1.5px solid var(--card-border);
+            box-shadow: 5px 5px 0 var(--primary);
+        }
+
+        [data-theme="dark"] .theme-toggle-btn {
+            box-shadow: 5px 5px 0 var(--primary);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0 var(--primary);
+        }
+
+        /* Responsive — keep every piece of portfolio content visible */
+        @media (max-width: 1100px) {
+            nav {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 1.6rem;
+                border-right: 0;
+                border-bottom: 1.5px solid var(--border-line);
+                overflow: visible;
+            }
+
+            .nav-top-block {
+                display: grid;
+                grid-template-columns: minmax(140px, 190px) repeat(3, minmax(150px, 1fr));
+                gap: 1.35rem;
+                align-items: start;
+            }
+
+            .logo {
+                grid-column: 1;
+            }
+
+            .profile-img-frame {
+                grid-column: 1;
+                grid-row: 2 / span 3;
+            }
+
+            .info-section {
+                margin-top: 0;
+            }
+
+            .nav-center-wrapper {
+                margin-top: 1.5rem;
+            }
+
+            .nav-links {
+                flex-direction: row;
+                justify-content: center;
+                border: 1.5px solid var(--border-line);
+            }
+
+            .nav-links a {
+                flex: 1;
+                text-align: center;
+                border-bottom: 0;
+                border-right: 1.5px solid var(--border-line);
+            }
+
+            .nav-links a:last-child {
+                border-right: 0;
+            }
+
+            .main-wrapper {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .hero {
+                min-height: 72vh;
+            }
+        }
+
+        @media (max-width: 760px) {
+            nav {
+                padding: 1.2rem;
+            }
+
+            .nav-top-block {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .logo {
+                grid-column: 1 / -1;
+            }
+
+            .profile-img-frame {
+                grid-column: 1 / -1;
+                grid-row: auto;
+            }
+
+            .nav-links {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nav-links a {
+                border-right: 1.5px solid var(--border-line);
+                border-bottom: 1.5px solid var(--border-line);
+            }
+
+            .nav-links a:nth-child(even) {
+                border-right: 0;
+            }
+
+            .nav-links a:last-child {
+                grid-column: 1 / -1;
+                border-bottom: 0;
+            }
+
+            .hero {
+                min-height: 70vh;
+                padding: 6rem 7% 4.5rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.15rem, 11vw, 3.5rem);
+            }
+
+            section {
+                padding: 76px 6%;
+            }
+
+            .project-grid,
+            .award-grid,
+            .contact-grid,
+            .img-row {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .project-card,
+            .project-card.large {
+                grid-column: span 1;
+                height: 360px;
+            }
+
+            .timeline-container {
+                padding-left: 1.7rem;
+            }
+
+            .timeline-dot {
+                left: -1.7rem;
+            }
+
+            .timeline-content {
+                padding: 1.55rem;
+            }
+
+            .detail-content {
+                padding: 1.5rem 1.4rem 3.5rem;
+            }
+
+            .detail-content h2 {
+                font-size: 2rem;
+            }
+        }
+
+
+
+        /* Hero typography refinement: prevent awkward line breaks on desktop */
+        .hero {
+            min-height: 82vh;
+            padding: 7.5rem clamp(3.25rem, 7.2vw, 7.5rem) 6rem;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            width: 100%;
+            max-width: 1120px;
+            font-family: 'Pretendard', sans-serif;
+            font-size: clamp(2.85rem, 4.2vw, 4.55rem);
+            font-weight: 820;
+            line-height: 1.18;
+            letter-spacing: -0.058em;
+            word-break: keep-all;
+            overflow-wrap: normal;
+            text-wrap: balance;
+            margin-bottom: 2.35rem;
+        }
+
+        .hero-second-line {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .gradient-text {
+            display: inline-block;
+            white-space: nowrap;
+            text-decoration: none;
+            background-image: linear-gradient(var(--primary), var(--primary));
+            background-repeat: no-repeat;
+            background-position: 0 94%;
+            background-size: 100% 0.16em;
+            padding-bottom: 0.04em;
+        }
+
+        .hero p {
+            max-width: 850px;
+            font-size: 1.04rem;
+            line-height: 1.85;
+        }
+
+        @media (max-width: 1180px) {
+            .hero {
+                padding-left: 7%;
+                padding-right: 7%;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.65rem, 4.5vw, 4rem);
+            }
+        }
+
+        @media (max-width: 760px) {
+            .hero {
+                min-height: 68vh;
+                padding: 5.5rem 7% 4rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.05rem, 9.5vw, 3.15rem);
+                line-height: 1.22;
+                letter-spacing: -0.052em;
+                margin-bottom: 1.8rem;
+            }
+
+            .hero-second-line {
+                white-space: normal;
+            }
+
+            .hero p {
+                font-size: 0.96rem;
+                line-height: 1.78;
+                padding-left: 1rem;
+            }
+        }
+
+
+        /* Monochrome refinement: 인트로와 포트폴리오 전체를 무채색으로 통일 */
+        :root {
+            --primary: #B8B8B8;
+            --primary-hover: #A3A3A3;
+            --accent-color: #B8B8B8;
+            --status-bg: #ECECEC;
+        }
+
+        [data-theme="dark"] {
+            --primary: #777777;
+            --primary-hover: #8A8A8A;
+            --accent-color: #777777;
+            --status-bg: #2A2A2A;
+        }
+
+        .intro-screen {
+            --intro-accent: #555555;
+        }
+
+        .intro-drop-zone.is-over {
+            background: #F2F2F2;
+            box-shadow: 0 0 0 10px #F2F2F2;
+        }
+
+        .intro-role::before,
+        .intro-role::after {
+            color: #555555;
+        }
+
+        .intro-role:hover {
+            color: #111111;
+        }
+
     </style>
 </head>
-<body>
+<body class="intro-locked">
+
+    <!-- 첫 진입 인터랙티브 인트로 -->
+    <div id="introScreen" class="intro-screen" aria-label="포트폴리오 인트로">
+        <div class="intro-mini-nav" aria-label="인트로 빠른 이동">
+            <button type="button" data-intro-target="#completed">Projects</button>
+            <button type="button" data-intro-target=".hero">About</button>
+            <button type="button" data-intro-target="#contact">Contact</button>
+        </div>
+
+        <div id="introStage" class="intro-stage">
+            <div class="intro-name-scene" aria-live="polite">
+                <p class="intro-name-line">Hi! I&#39;m <strong>CHOI SEOYOUNG</strong></p>
+            </div>
+
+            <div class="intro-role-scene">
+                <div class="intro-role-line" aria-live="polite">
+                    <span>I&#39;m a</span>
+                    <span id="introDropZone" class="intro-drop-zone" aria-label="역할을 여기에 드롭하세요">[ Drop Here ]</span>
+                </div>
+
+                <div class="intro-role-list" aria-label="역할 선택">
+                    <button type="button" class="intro-role" draggable="true" data-role="Data Scientist">Data Scientist</button>
+                    <button type="button" class="intro-role" draggable="true" data-role="HCI Researcher">HCI Researcher</button>
+                    <button type="button" class="intro-role" draggable="true" data-role="AI Engineer">AI Engineer</button>
+                    <button type="button" class="intro-role" draggable="true" data-role="Frontend Developer">Frontend Developer</button>
+                </div>
+
+                <p class="intro-hint">역할을 드래그하거나 눌러 주세요</p>
+            </div>
+
+            <svg class="intro-doodle" viewBox="0 0 300 250" aria-hidden="true">
+                    <g fill="none" stroke="#111" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="126" cy="92" r="54"/>
+                        <path d="M120 145 L120 182"/>
+                        <path d="M70 246 C72 195, 92 174, 123 174 C156 174, 176 198, 177 246"/>
+                        <circle cx="102" cy="89" r="20"/>
+                        <circle cx="145" cy="89" r="20"/>
+                        <path d="M122 89 H125"/>
+                        <circle cx="104" cy="88" r="2" fill="#111"/>
+                        <circle cx="145" cy="88" r="2" fill="#111"/>
+                        <path d="M116 112 C123 122, 132 121, 138 112"/>
+                        <path d="M84 43 L76 27"/>
+                        <path d="M108 38 L105 20"/>
+                        <path d="M137 39 L141 21"/>
+                        <path d="M158 49 L170 34"/>
+                        <g class="wave-arm">
+                            <path d="M174 215 C204 200, 221 178, 222 145 C223 123, 220 104, 224 89"/>
+                            <path d="M224 89 C222 74, 235 63, 247 69 C260 76, 257 93, 247 100 C238 106, 228 100, 224 89"/>
+                        </g>
+                    </g>
+                </svg>
+        </div>
+    </div>
+
 
     <div class="bg-glow-1"></div>
     <div class="bg-glow-2"></div>
 
     <nav>
         <div class="nav-top-block">
-            <div class="logo" onclick="window.scrollTo(0,0)">CHOI<br>SEOYOUNG</div>
+            <button type="button" class="logo" onclick="window.scrollTo(0,0)" aria-label="페이지 맨 위로 이동">CHOI<br>SEOYOUNG</button>
 
             <div class="profile-img-frame">
                 <img src="profile.jpg" alt="최서영 프로필 사진">
@@ -502,7 +1728,7 @@
                 <h3>연락처</h3>
                 <ul class="info-list">
                     <li>📞 +82 1080138939</li>
-                    <li>✉️ <a href="#" onclick="copyEmail(event)">seoyoung8939@gmail.com</a></li>
+                    <li>✉️ <button type="button" onclick="copyEmail(event)">seoyoung8939@gmail.com</button></li>
                     <li>📍 Seoul, South Korea</li>
                     <li>🌐 <a href="https://github.com/csy030922" target="_blank">github.com/csy030922</a></li>
                 </ul>
@@ -540,7 +1766,7 @@
     <div class="main-wrapper">
 
         <div class="hero">
-            <h1>사람을 위한 기술,<br><span class="gradient-text">더 나은 경험</span>을 설계합니다.</h1>
+            <h1>사람을 위한 기술,<br><span class="hero-second-line"><span class="gradient-text">더 나은 경험</span>을 설계합니다.</span></h1>
             <p>광운대학교 데이터 사이언스 전공 기반의 데이터 분석력과 프론트엔드 구현력을 결합하여, 인간과 AI의 정밀한 상호작용(HCI)을 설계하고 실무 시스템으로 구현합니다.</p>
         </div>
 
@@ -740,12 +1966,12 @@
     <div id="detailViewer" onclick="closeModalOutside(event)">
         <div class="modal-window">
             <div class="modal-header-sticky">
-                <div class="close-btn" onclick="closeDetail()">✕</div>
+                <button type="button" class="close-btn" onclick="closeDetail()" aria-label="상세 창 닫기">✕</button>
             </div>
             <div id="detailContent" class="detail-content"></div>
         </div>
     </div>
-    <div id="copyToast" class="copy-toast" role="status" aria-live="polite">이메일이 복사됐어요</div>
+    <output id="copyToast" class="copy-toast" aria-live="polite">이메일이 복사됐어요</output>
 
     <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="테마 변경">
         <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -967,6 +2193,106 @@
                 showCopyToast();
             }
         }
+
+        // =========================================================
+        // 첫 화면 인트로 인터랙션
+        // 이름 장면이 먼저 보인 뒤 역할 선택 장면으로 전환됩니다.
+        // =========================================================
+        const introScreen = document.getElementById('introScreen');
+        const introStage = document.getElementById('introStage');
+        const introDropZone = document.getElementById('introDropZone');
+        const introRoleButtons = document.querySelectorAll('.intro-role');
+        const introQuickButtons = document.querySelectorAll('[data-intro-target]');
+        let introFinished = false;
+        let pendingIntroTarget = '.hero';
+
+        // 새로고침하거나 다시 열어도 인트로 뒤에는 항상 포트폴리오 첫 화면부터 시작합니다.
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+
+
+        // 첫 장면: 이름 → 두 번째 장면: 역할 선택
+        window.setTimeout(() => {
+            if (!introFinished && introStage) {
+                introStage.classList.add('show-role');
+            }
+        }, 1800);
+
+        function finishIntro(targetSelector = '.hero', immediate = false) {
+            if (introFinished) return;
+            introFinished = true;
+            pendingIntroTarget = targetSelector || '.hero';
+
+            const delay = immediate ? 0 : 900;
+
+            window.setTimeout(() => {
+                // 역할 선택 후에는 현재 스크롤 위치와 관계없이 첫 화면을 먼저 준비합니다.
+                if (pendingIntroTarget === '.hero') {
+                    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+                }
+
+                introScreen.classList.add('is-leaving');
+                document.body.classList.remove('intro-locked');
+
+                window.setTimeout(() => {
+                    introScreen.remove();
+
+                    const target = document.querySelector(pendingIntroTarget);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'auto', block: 'start' });
+                    } else {
+                        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+                    }
+                }, 980);
+            }, delay);
+        }
+
+        function selectIntroRole(role) {
+            if (!introStage.classList.contains('show-role')) return;
+            if (introStage.classList.contains('is-complete')) return;
+
+            introDropZone.textContent = role;
+            introStage.classList.add('is-complete');
+            finishIntro('.hero');
+        }
+
+        introRoleButtons.forEach((button) => {
+            button.addEventListener('dragstart', (event) => {
+                event.dataTransfer.setData('text/plain', button.dataset.role);
+                event.dataTransfer.effectAllowed = 'copy';
+            });
+
+            button.addEventListener('click', () => {
+                selectIntroRole(button.dataset.role);
+            });
+        });
+
+        introDropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            introDropZone.classList.add('is-over');
+            event.dataTransfer.dropEffect = 'copy';
+        });
+
+        introDropZone.addEventListener('dragleave', () => {
+            introDropZone.classList.remove('is-over');
+        });
+
+        introDropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            introDropZone.classList.remove('is-over');
+            const role = event.dataTransfer.getData('text/plain');
+            if (role) selectIntroRole(role);
+        });
+
+        introQuickButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                finishIntro(button.dataset.introTarget, true);
+            });
+        });
+
+
     </script>
 </body>
 </html>
