@@ -1721,6 +1721,29 @@
             object-position: center;
         }
 
+        /* 자격증 카드 간 간격 */
+        .credential-card + .credential-card {
+            margin-top: 2.8rem;
+        }
+
+        /* OPIc 증빙 이미지 2장 */
+        .credential-proof-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .opic-proof .credential-proof-media {
+            min-height: 0;
+            aspect-ratio: 3 / 4;
+        }
+
+        .opic-proof .credential-proof-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
         /* =====================================================
            ARRIVIEW MODAL
         ===================================================== */
@@ -2613,6 +2636,97 @@
             font-size: 0.92rem;
             font-weight: 700;
             text-decoration: none;
+        }
+
+        /* =====================================================
+        OPIC FLIP CARD
+        ===================================================== */
+
+        .opic-flip-card {
+            appearance: none;
+
+            width: 100%;
+            height: 510px;
+
+            padding: 0;
+
+            border: 0;
+
+            background: transparent;
+            color: inherit;
+
+            cursor: pointer;
+
+            perspective: 1200px;
+        }
+
+        .opic-flip-inner {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+
+            transition: transform 0.7s
+                cubic-bezier(0.4, 0.2, 0.2, 1);
+
+            transform-style: preserve-3d;
+        }
+
+        .opic-flip-card.is-flipped .opic-flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .opic-flip-face {
+            position: absolute;
+            inset: 0;
+
+            display: grid;
+            place-items: center;
+
+            overflow: hidden;
+
+            border: 1px solid rgba(17, 17, 17, 0.45);
+
+            background: #efefeb;
+
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .opic-flip-back {
+            transform: rotateY(180deg);
+        }
+
+        .opic-flip-face img {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+
+            padding: 14px;
+
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .opic-flip-hint {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+
+            padding: 6px 9px;
+
+            border: 1px solid #111;
+
+            background: rgba(255, 255, 255, 0.92);
+            color: #111;
+
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.25);
         }
 
         /* =====================================================
@@ -4145,7 +4259,7 @@
                 Certificates
 
                 <span class="badge-count">
-                    1
+                    2
                 </span>
             </h2>
 
@@ -4209,6 +4323,109 @@
                     <figcaption>
                         SQL Developer · KDATA
                     </figcaption>
+                </figure>
+            </article>
+
+                        <!-- OPIc -->
+            <article class="credential-card">
+                <div class="credential-copy">
+                    <span class="credential-kicker">
+                        ENGLISH PROFICIENCY
+                    </span>
+
+                    <h3>
+                        OPIc
+                    </h3>
+
+                    <p class="credential-name">
+                        IH · Intermediate High
+                    </p>
+
+                    <p class="credential-description">
+                        ACTFL OPIc 영어 말하기 평가에서
+                        Intermediate High 등급을 취득했습니다.
+                        일상 및 사회적 상황에서 영어로 정보를
+                        전달하고 대화를 이어가는 의사소통 역량을
+                        검증받았습니다.
+                    </p>
+
+                    <div class="credential-info">
+                        <div>
+                            <span>평가 기관</span>
+
+                            <strong>
+                                ACTFL
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>등급</span>
+
+                            <strong>
+                                IH · Intermediate High
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>시험일</span>
+
+                            <strong>
+                                2026.09.05
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>유효기간</span>
+
+                            <strong>
+                                2026.09.05 – 2028.09.04
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="credential-proof opic-proof">
+
+                    <button
+                        type="button"
+                        class="opic-flip-card"
+                        onclick="flipOpicCard(this)"
+                        aria-label="OPIc 인증서와 Score Report 전환"
+                        aria-pressed="false"
+                    >
+                        <div class="opic-flip-inner">
+
+                            <!-- 앞면: OPIc 인증서 -->
+                            <div class="opic-flip-face opic-flip-front">
+                                <img
+                                    src="opic.JPG"
+                                    alt="최서영 OPIc IH 인증서"
+                                >
+
+                                <span class="opic-flip-hint">
+                                    CLICK TO FLIP ↻
+                                </span>
+                            </div>
+
+                            <!-- 뒷면: Score Report -->
+                            <div class="opic-flip-face opic-flip-back">
+                                <img
+                                    src="opic2.JPG"
+                                    alt="최서영 OPIc IH Score Report"
+                                >
+
+                                <span class="opic-flip-hint">
+                                    CLICK TO RETURN ↻
+                                </span>
+                            </div>
+
+                        </div>
+                    </button>
+
+                    <figcaption>
+                        OPIc IH · ACTFL · 2026
+                    </figcaption>
+
                 </figure>
             </article>
         </section>
@@ -4362,6 +4579,16 @@
                     isActive
                 );
             });
+        }
+        
+        function flipOpicCard(card) {
+            const isFlipped =
+                card.classList.toggle("is-flipped");
+
+            card.setAttribute(
+                "aria-pressed",
+                String(isFlipped)
+            );
         }
 
         function updateActiveMenu() {
